@@ -1,0 +1,6 @@
+
+#every generated tex files.
+*.aux
+*.dvi
+*.log
+*.synctex

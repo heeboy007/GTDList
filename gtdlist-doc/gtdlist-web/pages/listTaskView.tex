@@ -1,4 +1,6 @@
 \documentclass{article}
+\usepackage{graphicx}
+\graphicspath{{previews/}}
 
 \title{About ListTaskView Component}
 \date{2023-12-19}
@@ -8,9 +10,31 @@
     \maketitle
     \newpage
 
+    \begin{abstract}
+        This document is for documenting how "ListTaskView" should be developed, or made.1
+        It contains, if not, will be, 
+        \begin{enumerate}
+            \item what the Component(React) itself is for.
+            \item sample image how layout of UIs.
+            \item what kind of ui exists and ment to be.
+            \item what props(React) it needs.
+            \item what state(React) it has.
+            \item etc.
+        \end{enumerate}
+        It's purely made for visible instructions for faster and enthusiastic development.
+        In other words, it's free to manipulate whats in the document.
+        But if you're first time ever doing this, be sure to add yourself in the "author" tag.\\
+        Happy Coding!
+    \end{abstract}
+
+    \section{What the Component(React) itself is for}
     ListView is the main View of the GTDList.
     It will support editing and showing any existing task of the user.
 
+    \section{Sample image how layout of UIs}
+    \includegraphics{listTaskView}
+
+    \section{What kind of ui exists and ment to be}
     It includes several smaller UIs, such as :
     \begin{enumerate}
         \item title screen icon\\
@@ -34,5 +58,8 @@
         - "check" columnm will be just click toggleable.\\
         - "difficulty" columnm displays the float number by integer, with "+" sign to give a hint about the floating number.
     \end{enumerate}
+
+    The preview of the view could be shown in here.
+
 
 \end{document}

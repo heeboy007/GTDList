@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
+import ListTaskCategoryBar from "./listTaskCategoryBar";
+
 import './listTaskCategory.css';
 
 const columnDisplaySettings = {
@@ -54,17 +56,12 @@ function ListTaskCategory(props) {
 
     return (
         <section className={category}>
-            <div className="category">
-                {category.toUpperCase()}
-                {/* task를 더하는 버튼 */}
-                <button className="addTask" data-category="action" onClick={(e) => {
-                    alert("addTask");
-                }}><i className="fa-solid fa-plus"></i></button>
-                {/* 해당하는 카테고리의 task를 접는 버튼 */}
-                <button className="closeTask" onClick={(e) => {
+            <ListTaskCategoryBar 
+                hideTable={hideTable}
+                category={category}
+                onHideTableChange={(e) => {
                     setHideTable(!hideTable);
-                }}><i className={"fa-solid fa-caret-down" + (hideTable ? " closed" : "")}></i></button>
-            </div>
+                }}/>
             { hideTable ? "" : <table>
                 {/* Table 위쪽에 Column 명을 뿌리는 역할*/}
                 <thead>

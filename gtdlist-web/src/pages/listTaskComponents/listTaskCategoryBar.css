@@ -1,0 +1,52 @@
+div.category {
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    font-weight: bold;
+    align-items: center;
+    justify-content: space-between;
+    cursor: default;
+
+    padding: 10px;
+}
+
+div.category button.addTask {
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: auto;
+    background-color: black;
+    cursor: pointer;
+}
+
+div.category button.addTask i {
+    color: white;
+}
+
+div.category button.closeTask {
+    border: none;
+    width: 40px;
+    height: 40px;
+    padding: auto;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+div.category button.closeTask i {
+    color: black;
+}
+
+div.category button.closeTask i.closed {
+    rotate: 90deg;
+}
+
+/* section colors */
+
+section.action div.category {
+    background: #f15f5f;
+}
+
+section.defered div.category {
+    background: #ffef85;
+}

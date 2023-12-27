@@ -1,0 +1,37 @@
+/* header ~ NavLinks */
+
+nav.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+
+    border: 1px solid black; /* will be disabled in the future. */
+}
+
+nav.header a.logoLink {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 0;
+    color: black;
+    text-decoration: none;
+}
+
+nav.header div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+nav.header a.menu i {
+    width: 20px;
+    height: 20px;
+    color: black;
+    margin-right: 20px;
+}
+
+nav.header a.thumbnail img {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}

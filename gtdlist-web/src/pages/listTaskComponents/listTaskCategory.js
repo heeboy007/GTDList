@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField } from '@mui/material';
 
 import './listTaskCategory.css';
 
@@ -49,46 +48,50 @@ function ListTaskCategory(props) {
                     setHideTable(!hideTable);
                 }}><i className={"fa-solid fa-caret-down" + (hideTable ? " closed" : "")}></i></button>
             </div>
-            { hideTable ? "" : <TableContainer className="taskTable" component={Paper}>
-                <Table aria-label="simple table">
-                    <TableHead>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Date</TableCell>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.id}>
-                                <TableCell>
-                                    {editRowId === row.id ? (
-                                        <TextField 
-                                            value={row.name}
-                                            onChange={(e) => handleChange(e, row.id, 'name')}
-                                            onBlur={handleBlur}
-                                        />
-                                    ) : (
-                                        <span onClick={() => handleEdit(row)}>
-                                            {row.name}
-                                        </span>
-                                    )}
-                                </TableCell>
-                                <TableCell>
-                                    {editRowId === row.id ? (
-                                        <TextField 
-                                            value={row.date}
-                                            onChange={(e) => handleChange(e, row.id, 'date')}
-                                            onBlur={handleBlur}
-                                        />
-                                    ) : (
-                                        <span onClick={() => handleEdit(row)}>
-                                            {row.date}
-                                        </span>
-                                    )}
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>}
+            { hideTable ? "" : <table>
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows.map((row) => (
+                        <tr key={row.id}>
+                            <td onClick={() => handleEdit(row)}>
+                                {editRowId === row.id ? (
+                                    <input 
+                                        value={row.name}
+                                        onChange={(e) => handleChange(e, row.id, 'name')}
+                                        onBlur={handleBlur}
+                                        onKeyDown={(e) => {
+                                            if(e.key === "Enter")
+                                                handleBlur();
+                                        }}
+                                    />
+                                ) : (
+                                    row.name
+                                )}
+                            </td>
+                            <td onClick={() => handleEdit(row)}>
+                                {editRowId === row.id ? (
+                                    <input 
+                                        value={row.date}
+                                        onChange={(e) => handleChange(e, row.id, 'date')}
+                                        onBlur={handleBlur}
+                                        onKeyDown={(e) => {
+                                            if(e.key === "Enter")
+                                                handleBlur();
+                                        }}
+                                    />
+                                ) : (
+                                    row.date
+                                )}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>}
         </section>
     );
 }

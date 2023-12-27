@@ -59,6 +59,11 @@ section.defered div.category {
 
 /* table styles */
 
-section .taskTable {
+section table {
     overflow-x: auto;
+    border-collapse: collapse;
+}
+
+section td {
+    border: 1px solid #eee;
 }

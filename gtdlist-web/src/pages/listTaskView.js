@@ -26,7 +26,7 @@ function ListTaskView(props) {
 
     const handleEditCellChange = (row, col) => {
         setEditRowId({
-            rowId: row.id,
+            rowId: (row === null ? null : row.id),
             colId: col
         });
     };

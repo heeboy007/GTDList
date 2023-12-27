@@ -2,11 +2,6 @@ import React, { useState } from "react";
 
 import './listTaskCategory.css';
 
-const tempSampleRows = [
-    {id: 1, name: 'task 1', date: "2023-12-27 00:00"},
-    {id: 2, name: 'task 2', date: "2023-12-27 00:00"},
-]
-
 function capitalize(str) {
     if(!str) return str;
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -14,14 +9,11 @@ function capitalize(str) {
 
 function ListTaskCategory(props) {
     const category = props.category;
+    const editCell = props.editCell;
+    const handleEditCellChange = props.onEditCellChange;
     const [hideTable, setHideTable] = useState(false);
 
-    const [rows, setRows] = useState(tempSampleRows);
-    const [editRowId, setEditRowId] = useState(null);
-
-    const handleEdit = (row) => {
-        setEditRowId(row.id);
-    };
+    const [rows, setRows] = useState(props.tasks);
 
     const handleChange = (e, id, fieldName) => {
         const newRows = rows.map((row) => {
@@ -34,7 +26,7 @@ function ListTaskCategory(props) {
     };
 
     const handleBlur = () => {
-        setEditRowId(null);
+        handleEditCellChange(null, null);
     };
 
     return (
@@ -58,8 +50,8 @@ function ListTaskCategory(props) {
                 <tbody>
                     {rows.map((row) => (
                         <tr key={row.id}>
-                            <td onClick={() => handleEdit(row)}>
-                                {editRowId === row.id ? (
+                            <td onClick={() => handleEditCellChange(row, 'name')}>
+                                {editCell.rowId === row.id && editCell.colId === 'name' ? (
                                     <input 
                                         value={row.name}
                                         onChange={(e) => handleChange(e, row.id, 'name')}
@@ -73,8 +65,8 @@ function ListTaskCategory(props) {
                                     row.name
                                 )}
                             </td>
-                            <td onClick={() => handleEdit(row)}>
-                                {editRowId === row.id ? (
+                            <td onClick={() => handleEditCellChange(row, 'date')}>
+                                {editCell.rowId === row.id && editCell.colId === 'date' ? (
                                     <input 
                                         value={row.date}
                                         onChange={(e) => handleChange(e, row.id, 'date')}

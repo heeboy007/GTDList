@@ -56,3 +56,9 @@ section.action div.category {
 section.defered div.category {
     background: #ffef85;
 }
+
+/* table styles */
+
+section .taskTable {
+    overflow-x: auto;
+}

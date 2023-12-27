@@ -8,6 +8,11 @@ const tempSampleRows = [
     {id: 2, name: 'task 2', date: "2023-12-27 00:00"},
 ]
 
+function capitalize(str) {
+    if(!str) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
+
 function ListTaskCategory(props) {
     const category = props.category;
     const [hideTable, setHideTable] = useState(false);
@@ -36,7 +41,7 @@ function ListTaskCategory(props) {
     return (
         <section className={category}>
             <div className="category">
-                {category}
+                {category.toUpperCase()}
                 <button className="addTask" data-category="action" onClick={(e) => {
                     alert("addTask");
                 }}><i className="fa-solid fa-plus"></i></button>
@@ -44,7 +49,7 @@ function ListTaskCategory(props) {
                     setHideTable(!hideTable);
                 }}><i className={"fa-solid fa-caret-down" + (hideTable ? " closed" : "")}></i></button>
             </div>
-            <TableContainer component={Paper}>
+            { hideTable ? "" : <TableContainer className="taskTable" component={Paper}>
                 <Table aria-label="simple table">
                     <TableHead>
                         <TableCell>Name</TableCell>
@@ -83,7 +88,7 @@ function ListTaskCategory(props) {
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </TableContainer>}
         </section>
     );
 }

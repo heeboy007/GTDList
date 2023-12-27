@@ -13,11 +13,7 @@ function ListTaskView(props) {
         <div className="listTask">
             <ListTaskHeader></ListTaskHeader>
             <ListTaskCategory category={"action"}></ListTaskCategory>
-            <section className="defered">
-                <div className="category">
-                    DEFERED
-                </div>
-            </section>
+            <ListTaskCategory category={"defered"}></ListTaskCategory>
         </div>
     );
 }

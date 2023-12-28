@@ -12,6 +12,6 @@ a very simplay task list with feedbacks!
 5. Feedback for yourself(weekly checklist!)
 6. Don't know how to categorize your task? Answer simple questions to go!
 
-# Future Exapnsion
+# Future Expansion
 1. Google cloud save(maybe leaderboard for streak?)
 2. Mobile app 

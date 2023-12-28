@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import NavigationBar from "./listTaskComponents/NavigationBar";
 import Category from "./listTaskComponents/Category";
 
-import './listTaskView.css';
+import './ListTaskView.css';
 
 function ListTaskView(props) {
     let tasks = props.tasks;

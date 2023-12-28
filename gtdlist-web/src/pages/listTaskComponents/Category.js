@@ -1,36 +1,48 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import ListTaskCategoryBar from "./listTaskCategoryBar";
+import CategoryBar from "./CategoryBar";
+import CategoryTableHeader from "./CategoryTableHeader";
 
-import './listTaskCategory.css';
+import './Category.css';
 
 const columnDisplaySettings = {
-    id: {
-        displayed:false, 
-        type: "integer"
-    },
     name: {
         displayed: true,
         type: "text"
     },
-    date: {
+    time: {
+        displayed: true,
+        type: "datetime"
+    },
+    id: {
+        displayed: false, 
+        type: "integer"
+    },
+    order: {
+        displayed: false,
+        type: "integer"
+    },
+    memo: {
         displayed: true,
         type: "text"
+    },
+    difficulty: {
+        displayed: true,
+        type: "difficulty"
+    },
+    check: {
+        displayed: true,
+        type: "check"
     }
 };
 
-function capitalize(str) {
-    if(!str) return str;
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-}
-
-function ListTaskCategory(props) {
+function Category(props) {
     const category = props.category;
     const editCell = props.editCell;
     const handleEditCellChange = props.onEditCellChange;
     const [hideTable, setHideTable] = useState(false);
 
-    const [rows, setRows] = useState(props.tasks);
+    const [tasks, setTasks] = useState(props.tasks);
 
     const inputFocusRefs = useRef({});
 
@@ -41,13 +53,13 @@ function ListTaskCategory(props) {
     }, [editCell]);
 
     const handleChange = (e, id, fieldName) => {
-        const newRows = rows.map((row) => {
+        const newRows = tasks.map((row) => {
             if(row.id === id) {
                 return { ...row, [fieldName]: e.target.value };
             }
             return row;
         });
-        setRows(newRows);
+        setTasks(newRows);
     };
 
     const handleBlur = () => {
@@ -56,28 +68,21 @@ function ListTaskCategory(props) {
 
     return (
         <section className={category}>
-            <ListTaskCategoryBar 
+            <CategoryBar 
                 hideTable={hideTable}
                 category={category}
                 onHideTableChange={(e) => {
                     setHideTable(!hideTable);
                 }}/>
             { hideTable ? "" : <table>
-                {/* Table 위쪽에 Column 명을 뿌리는 역할*/}
-                <thead>
-                    <tr>
-                        {Object.entries(columnDisplaySettings).map(([col, settings]) => {
-                            return settings.displayed ? <td>{capitalize(col)}</td> : "";
-                        })}
-                    </tr>
-                </thead>
+                <CategoryTableHeader columnDisplaySettings={columnDisplaySettings}/>
                 {/* 누르면 바로 수정 / 저장이 가능한 테이블을 작성 */}
                 <tbody>
-                    {rows.map((row) => (
+                    {tasks.map((row) => (
                         <tr key={row.id}>
                             {Object.entries(row).map(([col, cellValue]) => columnDisplaySettings[col].displayed ? (
                                 <td onClick={() => handleEditCellChange(row, col)}>
-                                    {/* 정확히 수정중인 셀일 경우 아래의 input을 대신 랜더링 */}
+                                    {/* 수정하고자 하는 셀과 일치한다면 수정용 input을 대신 렌더링 */}
                                     {editCell.rowId === row.id && editCell.colId === col ? (
                                         <input 
                                             value={cellValue} 
@@ -105,4 +110,4 @@ function ListTaskCategory(props) {
     );
 }
 
-export default ListTaskCategory;
+export default Category;

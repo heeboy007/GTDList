@@ -1,23 +1,12 @@
 import React, { useState } from "react";
 
-import ListTaskHeader from "./listTaskComponents/listTaskHeader";
-import ListTaskCategory from "./listTaskComponents/listTaskCategory";
+import NavigationBar from "./listTaskComponents/NavigationBar";
+import Category from "./listTaskComponents/Category";
 
 import './listTaskView.css';
 
-const tempSampleRowsAction = [
-    {id: 1, name: 'task 1', date: "2023-12-27 00:00"},
-    {id: 2, name: 'task 2', date: "2023-12-27 00:00"},
-]
-
-const tempSampleRowsDefered = [
-    {id: 3, name: 'task 3', date: "2023-12-27 00:00"},
-    {id: 4, name: 'task 4', date: "2023-12-27 00:00"},
-]
-
 function ListTaskView(props) {
     let tasks = props.tasks;
-    console.log(tasks);
     
     const [editCell, setEditRowId] = useState({
         rowId: null,
@@ -33,15 +22,15 @@ function ListTaskView(props) {
 
     return (
         <div className="listTask">
-            <ListTaskHeader></ListTaskHeader>
-            <ListTaskCategory 
+            <NavigationBar />
+            <Category 
                 category={"action"} 
-                tasks={tempSampleRowsAction} 
+                tasks={tasks["action"]} 
                 editCell={editCell}
                 onEditCellChange={handleEditCellChange}/>
-            <ListTaskCategory 
+            <Category 
                 category={"defered"} 
-                tasks={tempSampleRowsDefered} 
+                tasks={tasks["defered"]} 
                 editCell={editCell}
                 onEditCellChange={handleEditCellChange}/>
         </div>

@@ -5,9 +5,17 @@ import ListView from './pages/listTaskView';
 import './App.css';
 
 function App() {
-    let [ tasks, setTasks ] = useState([
-        { name: 'Sample Task1', time:"whatever", memo:"Sample", difficulty:"normal", check:true, category:"ACTION", uid:8888, order:1 }
-    ]);
+    let [ tasks, setTasks ] = useState({
+        action:[
+            { name: 'Sample Task 1', time:"2023-12-28 08:10", memo:"Sample 1", difficulty:"normal", check:true, id:0, order:1 },
+            { name: 'Sample Task 2', time:"2023-12-28 08:10", memo:"Sample 2", difficulty:"hard", check:true, id:1, order:1 }
+        ],
+        defered:[
+            { name: 'Sample Task 3', time:"2023-12-28 08:10", memo:"Sample 3", difficulty:"normal", check:true, id:2, order:1 },
+            { name: 'Sample Task 4', time:"2023-12-28 08:10", memo:"Sample 4", difficulty:"easy", check:false, id:3, order:1 }
+        ]
+    });
+
     return (
         <div id='router-root'>
             <Routes>

@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 
-import './listTaskHeader.css';
+import './NavigationBar.css';
 
 import sample_thumbnail from '../temp_samples/member1.jpg';
 
-function ListTaskHeader() {
+function NavigationBar() {
     return (
         <nav className="header">
             <NavLink className="logoLink" to="/">GTDList</NavLink>
@@ -16,4 +16,4 @@ function ListTaskHeader() {
     );
 }
 
-export default ListTaskHeader;
+export default NavigationBar;

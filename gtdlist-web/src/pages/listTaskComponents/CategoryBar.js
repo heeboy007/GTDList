@@ -1,8 +1,8 @@
 import React from "react";
 
-import './listTaskCategoryBar.css';
+import './CategoryBar.css';
 
-function ListTaskCategoryBar(props) {
+function CategoryBar(props) {
     const category = props.category;
     const hideTable = props.hideTable;
 
@@ -19,4 +19,4 @@ function ListTaskCategoryBar(props) {
     );
 }
 
-export default ListTaskCategoryBar;
+export default CategoryBar;

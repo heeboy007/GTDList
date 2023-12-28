@@ -1,7 +1,7 @@
 import { NavLink, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 
-import ListView from './pages/ListTaskView';
+import ListTaskView from './pages/ListTaskView';
 import './App.css';
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
                         <NavLink to='/listview'>Main List</NavLink>
                     </div>
                 } />
-                <Route path='/listview' element={<ListView tasks={tasks}></ListView>}/>
+                <Route path='/listview' element={<ListTaskView tasks={tasks}></ListTaskView>}/>
             </Routes>
         </div>
     );

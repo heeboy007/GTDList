@@ -31,7 +31,7 @@ function ListTaskView(props) {
     };
 
     const handleDeleteTask = (category, row) => {
-        const newTasksCategory = tasks[category].slice(row, 1);
+        const newTasksCategory = tasks[category].filter(tasks => tasks["id"] !== row);
         const newTask = { ...tasks, [category]: newTasksCategory };
         setTasks(newTask);
     };

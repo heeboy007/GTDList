@@ -47,10 +47,14 @@ function Category(props) {
 
     const handleAddTask = () => {
         props.onAddTask(category);
-    }
+    };
 
     const handleChangeCellValue = (changedValue, rowId, colId) => {
         props.onChangeCellValue(category, changedValue, rowId, colId);
+    };
+
+    const handleDeleteTask = (row) => {
+        props.onDeleteTask(category, row);
     };
     
     //각각의 task에 대한 Component를 생성
@@ -62,6 +66,7 @@ function Category(props) {
             columnSettings={columnSettings}
             onChangeEditCell={handleEditCellChange}
             onChangeCellValue={handleChangeCellValue}
+            onDeleteTask={handleDeleteTask}
             onUnFocusCell={() => {
                 handleEditCellChange(null, null);
             }}/>

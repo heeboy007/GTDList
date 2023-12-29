@@ -10,10 +10,14 @@ function CategoryTableTask(props) {
     const onChangeCellValue = props.onChangeCellValue;
     const onUnFocusCell = props.onUnFocusCell;
     const onChangeEditCell = props.onChangeEditCell;
+    const onDeleteTask = props.onDeleteTask;
 
     return(
         <tr key={row.id}>
-            <td><i className="fa-solid fa-minus"></i></td>
+            <td
+                onClick={(e) => onDeleteTask(row.id)}>
+                <i className="fa-solid fa-minus"></i>
+            </td>
             {Object.entries(row).map(([col, cellValue]) => columnSettings[col].displayed ? (
             <td 
                 key={`${row.id}-${col}`}

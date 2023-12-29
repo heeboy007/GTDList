@@ -45,6 +45,10 @@ function Category(props) {
 
     const [hideTable, setHideTable] = useState(false);
 
+    const handleAddTask = () => {
+        props.onAddTask(category);
+    }
+
     const handleChangeCellValue = (changedValue, rowId, colId) => {
         props.onChangeCellValue(category, changedValue, rowId, colId);
     };
@@ -68,6 +72,7 @@ function Category(props) {
             <CategoryBar 
                 hideTable={hideTable}
                 category={category}
+                onAddTask={handleAddTask}
                 onHideTableChange={(e) => {
                     setHideTable(!hideTable);
                 }}/>

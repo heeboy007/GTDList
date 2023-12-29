@@ -27,7 +27,11 @@ function App() {
                 }/>
                 <Route path='/listview' element={
                     <ListTaskView 
-                        tasks={tasks} />
+                        tasks={tasks} 
+                        newTaskID={5}
+                        onSaveTask={(newTask) => {
+                            setTasks(newTask);
+                        }}/>
                 }/>
             </Routes>
         </div>

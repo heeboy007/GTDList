@@ -7,6 +7,7 @@ import './ListTaskView.css';
 
 function ListTaskView(props) {
     const [tasks, setTasks] = useState(props.tasks);
+    const [newTaskID, setNewTaskId] = useState(props.newTaskID);
     
     const handleChangeCellValue = (category, changedValue, rowId, colId) => {
         const newTasksCategory = tasks[category].map((row) => {
@@ -17,6 +18,22 @@ function ListTaskView(props) {
         });
         const newTasks = { ...tasks, [category]: newTasksCategory};
         setTasks(newTasks);
+    };
+
+    const handleAddTask = (category) => {
+        console.log(newTaskID);
+        const newTasksCategory = tasks[category].concat({
+            name: '', time:'', memo:'', difficulty:"normal", check:false, id: newTaskID, order: newTaskID
+        });
+        const newTasks = { ...tasks, [category]: newTasksCategory};
+        setTasks(newTasks);
+        setNewTaskId(newTaskID + 1);
+    };
+
+    const handleDeleteTask = (category, row) => {
+        const newTasksCategory = tasks[category].slice(row, 1);
+        const newTask = { ...tasks, [category]: newTasksCategory };
+        setTasks(newTask);
     };
 
     const [editCell, setEditRowId] = useState({
@@ -38,12 +55,16 @@ function ListTaskView(props) {
                 category={"action"} 
                 tasks={tasks["action"]} 
                 editCell={editCell}
+                onAddTask={handleAddTask}
+                onDeleteTask={handleDeleteTask}
                 onChangeCellValue={handleChangeCellValue}
                 onEditCellChange={handleEditCellChange}/>
             <Category 
                 category={"defered"} 
                 tasks={tasks["defered"]} 
                 editCell={editCell}
+                onAddTask={handleAddTask}
+                onDeleteTask={handleDeleteTask}
                 onChangeCellValue={handleChangeCellValue}
                 onEditCellChange={handleEditCellChange}/>
         </div>

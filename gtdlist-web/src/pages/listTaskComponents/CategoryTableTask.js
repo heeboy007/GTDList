@@ -14,9 +14,13 @@ function CategoryTableTask(props) {
     return(
         <tr key={row.id}>
             {Object.entries(row).map(([col, cellValue]) => columnSettings[col].displayed ? (
-            <td onClick={() => onChangeEditCell(row, col)}>
+            <td 
+                key={`${row.id}-${col}`}
+                onClick={() => onChangeEditCell(row, col)}>
                 {/* 수정하고자 하는 셀과 일치한다면 수정용 input을 대신 렌더링 */}
-                {currentEditCell.rowId === row.id && currentEditCell.colId === col ? (
+                {(currentEditCell.rowId === row.id 
+                    && currentEditCell.colId === col) 
+                    || col === "check" ? (
                 <CategoryTableInput
                     type={columnSettings[col].type}
                     cellValue={cellValue} 

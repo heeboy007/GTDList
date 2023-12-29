@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
+import './CategoryTableInput.css';
+
 function CategoryTableInput(props) {
     const row = props.row;
     const col = props.col;
@@ -49,17 +51,10 @@ function CategoryTableInput(props) {
         );
     } else if (props.type === "check") {
         builtInput = (
-            <input 
-                type="checkbox"
-                value={cellValue} 
-                onChange={(e) => props.onChangeCellValue(e.target.value, row, col)}
-                onBlur={props.onUnFocusCell}
-                onKeyDown={(e) => {
-                    if(e.key === "Enter")
-                        props.onUnFocusCell();
-                }}
-                ref={(ref) => {
-                    inputRef.current = ref;
+            <i
+                className={cellValue ? "myCheck fa-solid fa-check" : "myCheck fa-solid fa-xmark"}
+                onClick={(e) => {
+                    props.onChangeCellValue(!cellValue, row, col)
                 }}
             />
         );

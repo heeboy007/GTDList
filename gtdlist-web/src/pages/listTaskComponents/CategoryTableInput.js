@@ -16,7 +16,7 @@ function CategoryTableInput(props) {
         inputRef.current?.focus();
     }, [row, col]);
 
-    //셀을 직접 에디팅 할때 js dom input 객체에 직접 "foucs"명령을 전달하기 위한가 존재함.
+    //셀을 직접 에디팅 할때 js dom input 객체에 직접 "foucs"명령을 전달하기 위해 존재함.
     //강제 포커싱이 되면 사용자가 바로 값을 바꾸기고 편하고 handleBlur또한 정상 작동
     if(props.type === "text") {
         builtInput = (
@@ -61,14 +61,15 @@ function CategoryTableInput(props) {
     } else if (props.type === "difficulty") {
         builtInput = (
             <select
+            value={cellValue}
             onChange={(e) => props.onChangeCellValue(e.target.value, row, col)}
             onBlur={props.onUnFocusCell}
             ref={(ref) => {
                 inputRef.current = ref;
             }}>
-                <option value="easy" selected={cellValue === "easy"}>{"easy"}</option>
-                <option value="normal" selected={cellValue === "normal"}>{"normal"}</option>
-                <option value="hard" selected={cellValue === "hard"}>{"hard"}</option>
+                <option value="easy">{"easy"}</option>
+                <option value="normal">{"normal"}</option>
+                <option value="hard">{"hard"}</option>
             </select>
         );
     }

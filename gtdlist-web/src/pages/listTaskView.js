@@ -6,8 +6,19 @@ import Category from "./ListTaskComponents/Category";
 import './ListTaskView.css';
 
 function ListTaskView(props) {
-    let tasks = props.tasks;
+    const [tasks, setTasks] = useState(props.tasks);
     
+    const handleChangeCellValue = (category, changedValue, rowId, colId) => {
+        const newTasksCategory = tasks[category].map((row) => {
+            if(row.id === rowId) {
+                return { ...row, [colId]: changedValue };
+            }
+            return row;
+        });
+        const newTasks = { ...tasks, [category]: newTasksCategory};
+        setTasks(newTasks);
+    };
+
     const [editCell, setEditRowId] = useState({
         rowId: null,
         colId: null
@@ -27,11 +38,13 @@ function ListTaskView(props) {
                 category={"action"} 
                 tasks={tasks["action"]} 
                 editCell={editCell}
+                onChangeCellValue={handleChangeCellValue}
                 onEditCellChange={handleEditCellChange}/>
             <Category 
                 category={"defered"} 
                 tasks={tasks["defered"]} 
                 editCell={editCell}
+                onChangeCellValue={handleChangeCellValue}
                 onEditCellChange={handleEditCellChange}/>
         </div>
     );

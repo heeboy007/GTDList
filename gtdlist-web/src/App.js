@@ -24,8 +24,11 @@ function App() {
                         Main Page. <br></br>
                         <NavLink to='/listview'>Main List</NavLink>
                     </div>
-                } />
-                <Route path='/listview' element={<ListTaskView tasks={tasks}></ListTaskView>}/>
+                }/>
+                <Route path='/listview' element={
+                    <ListTaskView 
+                        tasks={tasks} />
+                }/>
             </Routes>
         </div>
     );

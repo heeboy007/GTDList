@@ -40,21 +40,15 @@ const columnSettings = {
 function Category(props) {
     const category = props.category;
     const editCell = props.editCell;
+    const tasks = props.tasks;
     const handleEditCellChange = props.onEditCellChange;
 
     const [hideTable, setHideTable] = useState(false);
-    const [tasks, setTasks] = useState(props.tasks);
 
-    const handleChange = (changedValue, rowId, colId) => {
-        const newTasks = tasks.map((row) => {
-            if(row.id === rowId) {
-                return { ...row, [colId]: changedValue };
-            }
-            return row;
-        });
-        setTasks(newTasks);
+    const handleChangeCellValue = (changedValue, rowId, colId) => {
+        props.onChangeCellValue(category, changedValue, rowId, colId);
     };
-
+    
     //각각의 task에 대한 Component를 생성
     let taskRows = tasks.map((row) => (
         <CategoryTableTask
@@ -63,7 +57,7 @@ function Category(props) {
             currentEditCell={editCell}
             columnSettings={columnSettings}
             onChangeEditCell={handleEditCellChange}
-            onChangeCellValue={handleChange}
+            onChangeCellValue={handleChangeCellValue}
             onUnFocusCell={() => {
                 handleEditCellChange(null, null);
             }}/>
@@ -83,7 +77,7 @@ function Category(props) {
                 <tbody>
                     { taskRows }
                 </tbody>
-            </table>}
+            </table> }
         </section>
     );
 }

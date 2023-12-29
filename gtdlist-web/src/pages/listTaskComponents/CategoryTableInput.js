@@ -20,7 +20,7 @@ function CategoryTableInput(props) {
         builtInput = (
             <input 
                 value={cellValue} 
-                onChange={(e) => props.onChangeCellValue(e, row, col)}
+                onChange={(e) => props.onChangeCellValue(e.target.value, row, col)}
                 onBlur={props.onUnFocusCell}
                 onKeyDown={(e) => {
                     if(e.key === "Enter")
@@ -30,12 +30,13 @@ function CategoryTableInput(props) {
                     inputRef.current = ref;
                 }}
             />
-        )
-    } else if (props.type === "time") {
+        );
+    } else if (props.type === "datetime") {
         builtInput = (
             <input 
+                type="datetime-local"
                 value={cellValue} 
-                onChange={(e) => props.onChangeCellValue(e, row, col)}
+                onChange={(e) => props.onChangeCellValue(e.target.value, row, col)}
                 onBlur={props.onUnFocusCell}
                 onKeyDown={(e) => {
                     if(e.key === "Enter")
@@ -45,7 +46,23 @@ function CategoryTableInput(props) {
                     inputRef.current = ref;
                 }}
             />
-        )
+        );
+    } else if (props.type === "check") {
+        builtInput = (
+            <input 
+                type="checkbox"
+                value={cellValue} 
+                onChange={(e) => props.onChangeCellValue(e.target.value, row, col)}
+                onBlur={props.onUnFocusCell}
+                onKeyDown={(e) => {
+                    if(e.key === "Enter")
+                        props.onUnFocusCell();
+                }}
+                ref={(ref) => {
+                    inputRef.current = ref;
+                }}
+            />
+        );
     }
 
     return builtInput;

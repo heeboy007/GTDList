@@ -45,14 +45,14 @@ function Category(props) {
     const [hideTable, setHideTable] = useState(false);
     const [tasks, setTasks] = useState(props.tasks);
 
-    const handleChange = (e, id, fieldName) => {
-        const newRows = tasks.map((row) => {
-            if(row.id === id) {
-                return { ...row, [fieldName]: e.target.value };
+    const handleChange = (changedValue, rowId, colId) => {
+        const newTasks = tasks.map((row) => {
+            if(row.id === rowId) {
+                return { ...row, [colId]: changedValue };
             }
             return row;
         });
-        setTasks(newRows);
+        setTasks(newTasks);
     };
 
     //각각의 task에 대한 Component를 생성

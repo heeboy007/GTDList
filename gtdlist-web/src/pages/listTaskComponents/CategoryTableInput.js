@@ -58,6 +58,19 @@ function CategoryTableInput(props) {
                 }}
             />
         );
+    } else if (props.type === "difficulty") {
+        builtInput = (
+            <select
+            onChange={(e) => props.onChangeCellValue(e.target.value, row, col)}
+            onBlur={props.onUnFocusCell}
+            ref={(ref) => {
+                inputRef.current = ref;
+            }}>
+                <option value="easy" selected={cellValue === "easy"}>{"easy"}</option>
+                <option value="normal" selected={cellValue === "normal"}>{"normal"}</option>
+                <option value="hard" selected={cellValue === "hard"}>{"hard"}</option>
+            </select>
+        );
     }
 
     return builtInput;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import NavigationBar from "./listTaskComponents/NavigationBar";
-import Category from "./listTaskComponents/Category";
+import NavigationBar from "./ListTaskComponents/NavigationBar";
+import Category from "./ListTaskComponents/Category";
 
 import './ListTaskView.css';
 

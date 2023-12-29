@@ -13,6 +13,7 @@ function CategoryTableTask(props) {
 
     return(
         <tr key={row.id}>
+            <td><i className="fa-solid fa-minus"></i></td>
             {Object.entries(row).map(([col, cellValue]) => columnSettings[col].displayed ? (
             <td 
                 key={`${row.id}-${col}`}

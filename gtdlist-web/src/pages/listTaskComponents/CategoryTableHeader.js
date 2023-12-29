@@ -14,6 +14,7 @@ function CategoryTableHeader (props) {
     return (
         <thead>
             <tr>
+                <td><i className="fa-solid fa-minus"></i></td>
                 {columnsList}
             </tr>
         </thead>

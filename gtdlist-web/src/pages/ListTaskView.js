@@ -1,13 +1,43 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { css } from "@emotion/react";
 
 import NavigationBar from "./ListTaskComponents/NavigationBar";
 import Category from "./ListTaskComponents/Category";
 
-function ListTaskView(props) {
-    const [tasks, setTasks] = useState(props.tasks);
-    const [newTaskID, setNewTaskId] = useState(props.newTaskID);
+function ListTaskView() {
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+                event.preventDefault();
+                //future "save function" must be here.
+            }
+        };
+
+        const handleContextMenu = (event) => {
+            event.preventDefault();
+        };
+
+        window.addEventListener('contextmenu', handleContextMenu);
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('contextmenu', handleContextMenu);
+        };
+    }, []);
+
+    const [ tasks, setTasks ] = useState({
+        action:[
+            { name: 'Sample Task 1', time:"2023-12-28 08:10", memo:"Sample 1", difficulty:"normal", check:true, id:0, order:1 },
+            { name: 'Sample Task 2', time:"2023-12-28 08:10", memo:"Sample 2", difficulty:"hard", check:true, id:1, order:1 }
+        ],
+        defered:[
+            { name: 'Sample Task 3', time:"2023-12-28 08:10", memo:"Sample 3", difficulty:"normal", check:true, id:2, order:1 },
+            { name: 'Sample Task 4', time:"2023-12-28 08:10", memo:"Sample 4", difficulty:"easy", check:false, id:3, order:1 }
+        ]
+    });
+    const [newTaskID, setNewTaskId] = useState(5);
     
     const handleChangeCellValue = (category, changedValue, rowId, colId) => {
         const newTasksCategory = tasks[category].map((row) => {
@@ -52,18 +82,16 @@ function ListTaskView(props) {
         <div 
             className="listTask"
             css={css`
-                    width: 960px;
-                    height: 100%;
-                    max-width: 960px;
-                    display: flex;
-                    flex-direction: column;
-                    padding: 0;
-                    margin: 0 auto;
-                    box-sizing: content-box;
-                    background: white;
-                    overflow-y: auto;
-
-                    border: 1px solid black; /* will be disabled in the future. */
+                width: 960px;
+                height: 100%;
+                max-width: 960px;
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+                margin: 0 auto;
+                box-sizing: content-box;
+                background: white;
+                overflow-y: auto;
             `}>
             <NavigationBar />
             <Category 

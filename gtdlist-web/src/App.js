@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { NavLink, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { css } from '@emotion/react';
 
+import MainView from './pages/MainView';
 import ListTaskView from './pages/ListTaskView';
 
 function App() {
@@ -14,12 +15,7 @@ function App() {
                 background-color: #eee;
             `}>
             <Routes>
-                <Route path='/' element={
-                    <div>
-                        Main Page. <br></br>
-                        <NavLink to='/listview'>Main List</NavLink>
-                    </div>
-                }/>
+                <Route path='/' Component={MainView}/>
                 <Route path='/listview' Component={ListTaskView}/>
             </Routes>
         </div>

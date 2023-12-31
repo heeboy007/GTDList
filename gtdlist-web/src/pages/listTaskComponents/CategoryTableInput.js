@@ -1,12 +1,12 @@
+/** @jsxImportSource @emotion/react */
 import React, { useEffect, useRef } from "react";
-import { format } from 'date-fns';
+import { format } from "date-fns";
+import { css } from "@emotion/react";
 
 import DateTimePicker from 'react-datetime-picker';
 
-import './CategoryTableInput.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
-import 'react-clock/dist/Clock.css';
 
 function CategoryTableInput(props) {
     const row = props.row;
@@ -43,20 +43,33 @@ function CategoryTableInput(props) {
         let dateString = cellValue.replace(' ', 'T');
         builtInput = (
             <DateTimePicker
+                css={css`
+                    width: 100%;
+                    div {
+                        border: none;
+                    }
+                `}
                 value={new Date(dateString)} 
+                disableClock={true}
                 onChange={(date) => {
                     const formattedDate = format(date, 'yyyy-MM-dd HH:mm');
                     props.onChangeCellValue(formattedDate, row, col);
                 }}
-                onBlur={props.onUnFocusCell}
-                ref={(ref) => {
-                    inputRef.current = ref;
+                onKeyDown={(e) => {
+                    console.log(e.key);
+                    if(e.key === "Enter")
+                        props.onUnFocusCell();
                 }}
+                onBlur={props.onUnFocusCell}
             />
         );
     } else if (props.type === "check") {
         builtInput = (
             <i
+                css={css`
+                    width: 100%;
+                    height: 100%;
+                `}
                 className={cellValue ? "myCheck fa-solid fa-check" : "myCheck fa-solid fa-xmark"}
                 onClick={(e) => {
                     props.onChangeCellValue(!cellValue, row, col)

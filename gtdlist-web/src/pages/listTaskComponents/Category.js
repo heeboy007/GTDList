@@ -9,31 +9,38 @@ import './Category.css';
 const columnSettings = {
     name: {
         displayed: true,
-        type: "text"
+        type: "text",
+        inputAlwaysRendered: false
     },
     time: {
         displayed: true,
-        type: "datetime"
+        type: "datetime",
+        inputAlwaysRendered: true
     },
     id: {
         displayed: false, 
-        type: "integer"
+        type: "integer",
+        inputAlwaysRendered: false
     },
     order: {
         displayed: false,
-        type: "integer"
+        type: "integer",
+        inputAlwaysRendered: false
     },
     memo: {
         displayed: true,
-        type: "text"
+        type: "text",
+        inputAlwaysRendered: false
     },
     difficulty: {
         displayed: true,
-        type: "difficulty"
+        type: "difficulty",
+        inputAlwaysRendered: false
     },
     check: {
         displayed: true,
-        type: "check"
+        type: "check",
+        inputAlwaysRendered: true
     }
 };
 

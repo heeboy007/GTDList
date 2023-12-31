@@ -1,9 +1,9 @@
+/** @jsxImportSource @emotion/react */
 import React, { useState } from "react";
+import { css } from "@emotion/react";
 
 import NavigationBar from "./ListTaskComponents/NavigationBar";
 import Category from "./ListTaskComponents/Category";
-
-import './ListTaskView.css';
 
 function ListTaskView(props) {
     const [tasks, setTasks] = useState(props.tasks);
@@ -49,7 +49,22 @@ function ListTaskView(props) {
     };
 
     return (
-        <div className="listTask">
+        <div 
+            className="listTask"
+            css={css`
+                    width: 960px;
+                    height: 100%;
+                    max-width: 960px;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0;
+                    margin: 0 auto;
+                    box-sizing: content-box;
+                    background: white;
+                    overflow-y: auto;
+
+                    border: 1px solid black; /* will be disabled in the future. */
+            `}>
             <NavigationBar />
             <Category 
                 category={"action"} 

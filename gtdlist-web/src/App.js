@@ -1,8 +1,9 @@
+/** @jsxImportSource @emotion/react */
 import { NavLink, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+import { css } from '@emotion/react';
 
 import ListTaskView from './pages/ListTaskView';
-import './App.css';
 
 function App() {
     let [ tasks, setTasks ] = useState({
@@ -17,7 +18,13 @@ function App() {
     });
 
     return (
-        <div id='router-root'>
+        <div 
+            id='router-root'
+            css={css`
+                width: 100vw;
+                height: 100vh;
+                background-color: #ddd;
+            `}>
             <Routes>
                 <Route path='/' element={
                     <div>

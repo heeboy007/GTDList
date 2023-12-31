@@ -1,6 +1,12 @@
 import React, { useEffect, useRef } from "react";
+import { format } from 'date-fns';
+
+import DateTimePicker from 'react-datetime-picker';
 
 import './CategoryTableInput.css';
+import 'react-datetime-picker/dist/DateTimePicker.css';
+import 'react-calendar/dist/Calendar.css';
+import 'react-clock/dist/Clock.css';
 
 function CategoryTableInput(props) {
     const row = props.row;
@@ -34,16 +40,15 @@ function CategoryTableInput(props) {
             />
         );
     } else if (props.type === "datetime") {
+        let dateString = cellValue.replace(' ', 'T');
         builtInput = (
-            <input 
-                type="datetime-local"
-                value={cellValue} 
-                onChange={(e) => props.onChangeCellValue(e.target.value, row, col)}
-                onBlur={props.onUnFocusCell}
-                onKeyDown={(e) => {
-                    if(e.key === "Enter")
-                        props.onUnFocusCell();
+            <DateTimePicker
+                value={new Date(dateString)} 
+                onChange={(date) => {
+                    const formattedDate = format(date, 'yyyy-MM-dd HH:mm');
+                    props.onChangeCellValue(formattedDate, row, col);
                 }}
+                onBlur={props.onUnFocusCell}
                 ref={(ref) => {
                     inputRef.current = ref;
                 }}

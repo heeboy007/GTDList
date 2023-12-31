@@ -6,6 +6,7 @@ div.category {
     align-items: center;
     justify-content: space-between;
     cursor: default;
+    border-radius: 10px;
 
     padding: 10px;
 }

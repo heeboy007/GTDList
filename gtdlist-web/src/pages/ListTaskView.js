@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useState, useEffect } from "react";
 import { css } from "@emotion/react";
+import { format } from "date-fns";
 
 import NavigationBar from "./ListTaskComponents/NavigationBar";
 import Category from "./ListTaskComponents/Category";
@@ -51,9 +52,9 @@ function ListTaskView() {
     };
 
     const handleAddTask = (category) => {
-        console.log(newTaskID);
+        const newTime = format(new Date(), 'yyyy-MM-dd HH:mm')
         const newTasksCategory = tasks[category].concat({
-            name: '', time:'', memo:'', difficulty:"normal", check:false, id: newTaskID, order: newTaskID
+            name: '', time:newTime, memo:'', difficulty:"normal", check:false, id: newTaskID, order: newTaskID
         });
         const newTasks = { ...tasks, [category]: newTasksCategory};
         setTasks(newTasks);

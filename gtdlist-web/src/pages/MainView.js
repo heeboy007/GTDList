@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { NavLink } from "react-router-dom";
 import { css } from "@emotion/react";
 
-import logo from './temp_samples/FlowForge-Longer.svg';
+import NaviGationBar from "./MainComponents/NavigationBar";
+import Impression from "./MainComponents/Impression";
 
 function MainView() {
     return (
@@ -20,16 +20,8 @@ function MainView() {
                 background: white;
                 overflow-y: auto;
             `}>
-            <div>
-                <span><img src={logo} alt="logo"/></span>
-                <nav>
-                    <NavLink to='/listview'>Main List</NavLink>
-                </nav>
-                <div>
-                    <button>로그인</button>
-                    <button>회원가입</button>
-                </div>
-            </div>
+            <NaviGationBar />
+            <Impression />
         </div>
     );
 }

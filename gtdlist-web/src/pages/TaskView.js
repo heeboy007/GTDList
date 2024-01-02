@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 import Category from "./ListTaskComponents/Category";
 
-function ListTaskView() {
+function TaskView() {
     useEffect(() => {
         const handleKeyDown = (event) => {
             if ((event.ctrlKey || event.metaKey) && event.key === 's') {
@@ -113,4 +113,4 @@ function ListTaskView() {
     );
 }
 
-export default ListTaskView;
+export default TaskView;

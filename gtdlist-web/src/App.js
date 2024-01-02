@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import MainView from './pages/MainView';
-import ListTaskView from './pages/ListTaskView';
+import TaskView from './pages/TaskView';
 import LoginView from './pages/LoginView';
 import RegisterView from './pages/RegisterView';
 import Helmet from './component/Helmet';
@@ -20,7 +20,7 @@ function App() {
                 <Route path='/' Component={MainView}/>
                 <Route path='/register' Component={RegisterView}/>
                 <Route path='/login' Component={LoginView}/>
-                <Route path='/listview' Component={ListTaskView}/>
+                <Route path='/listview' Component={TaskView}/>
             </Routes>
         </AppDiv>
     );

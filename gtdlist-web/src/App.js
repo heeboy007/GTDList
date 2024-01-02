@@ -1,30 +1,28 @@
-/** @jsxImportSource @emotion/react */
 import { Routes, Route } from 'react-router-dom';
-import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
 import MainView from './pages/MainView';
 import ListTaskView from './pages/ListTaskView';
+import LoginView from './pages/LoginView';
+import RegisterView from './pages/RegisterView';
+import Helmet from './component/Helmet';
+
+const AppDiv = styled.div`
+width: 100vw;
+height: 100vh;
+`;
 
 function App() {
     return (
-        <div 
-            id='router-root'
-            css={css`
-                width: 100vw;
-                height: 100vh;
-                background-color: #eee;
-                @font-face {
-                    font-family: 'S-CoreDream-3Light';
-                    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
-                    font-weight: normal;
-                    font-style: normal;
-                }
-            `}>
+        <AppDiv>
+            <Helmet></Helmet>
             <Routes>
                 <Route path='/' Component={MainView}/>
+                <Route path='/register' Component={RegisterView}/>
+                <Route path='/login' Component={LoginView}/>
                 <Route path='/listview' Component={ListTaskView}/>
             </Routes>
-        </div>
+        </AppDiv>
     );
 }
 

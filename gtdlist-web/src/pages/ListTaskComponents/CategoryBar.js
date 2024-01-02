@@ -1,21 +1,78 @@
-import React from "react";
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
-import './CategoryBar.css';
+const CategoryDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    font-weight: bold;
+    align-items: center;
+    justify-content: space-between;
+    cursor: default;
+    border-radius: 10px;
+    padding: 10px;
+`;
+
+/* section colors */
+const BarColorAction = css`
+    background: #f15f5f;
+`;
+
+const BarColorDefered = css`
+    background: #ffef85;
+`;
+
+const PlusButton = styled.button`
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: auto;
+    background-color: black;
+    cursor: pointer;
+
+    i {
+        color: white;
+    }
+`;
+
+const CloseButton = styled.button`
+    border: none;
+    width: 40px;
+    height: 40px;
+    padding: auto;
+    background-color: transparent;
+    cursor: pointer;
+
+    i {
+        color: black;
+    }
+
+    i.closed {
+        rotate: 90deg;
+    }
+`;
 
 function CategoryBar(props) {
-    const category = props.category;
-    const hideTable = props.hideTable;
+    const mapCategoryToColor = {
+        "action": BarColorAction,
+        "defered": BarColorDefered
+    };
 
+    console.log(mapCategoryToColor[props.category]);
     return (
-        <div className="category">
-            {category.toUpperCase()}
+        <CategoryDiv css={mapCategoryToColor[props.category]}>
+            {props.category.toUpperCase()}
             {/* task를 더하는 버튼 */}
-            <button className="addTask" data-category="action" onClick={(e) => {
-                props.onAddTask();
-            }}><i className="fa-solid fa-plus"></i></button>
+            <PlusButton onClick={(e) => { props.onAddTask() }}>
+                <i className="fa-solid fa-plus"></i>
+            </PlusButton>
             {/* 해당하는 카테고리의 task를 접는 버튼 */}
-            <button className="closeTask" onClick={props.onHideTableChange}><i className={"fa-solid fa-caret-down" + (hideTable ? " closed" : "")}></i></button>
-        </div>
+            <CloseButton onClick={props.onHideTableChange}>
+                <i className={"fa-solid fa-caret-down" + (props.hideTable ? " closed" : "")}></i>
+            </CloseButton>
+        </CategoryDiv>
     );
 }
 

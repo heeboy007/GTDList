@@ -4,7 +4,21 @@ import CategoryBar from "./CategoryBar";
 import CategoryTableHeader from "./CategoryTableHeader";
 import CategoryTableTask from "./CategoryTableTask";
 
-import './Category.css';
+import styled from '@emotion/styled';
+
+const Section = styled.section`
+display: flex;
+flex-direction: column;
+
+table {
+    overflow-x: auto;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #eee;
+}
+`;
 
 const columnSettings = {
     name: {
@@ -80,7 +94,7 @@ function Category(props) {
     ));
 
     return (
-        <section className={category}>
+        <Section className={category}>
             <CategoryBar 
                 hideTable={hideTable}
                 category={category}
@@ -95,7 +109,7 @@ function Category(props) {
                     { taskRows }
                 </tbody>
             </table> }
-        </section>
+        </Section>
     );
 }
 

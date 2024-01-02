@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { css } from "@emotion/react";
 import { format } from "date-fns";
 
-import NavigationBar from "./ListTaskComponents/NavigationBar";
 import Category from "./ListTaskComponents/Category";
 
 function ListTaskView() {
@@ -94,7 +93,6 @@ function ListTaskView() {
                 background: white;
                 overflow-y: auto;
             `}>
-            <NavigationBar />
             <Category 
                 category={"action"} 
                 tasks={tasks["action"]} 

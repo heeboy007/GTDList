@@ -7,16 +7,12 @@ import DropTable from "../container/DropTable";
 import styled from '@emotion/styled';
 
 const Section = styled.section`
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
 table {
     overflow-x: auto;
     border-collapse: collapse;
-}
-
-td {
-    border: 1px solid #eee;
 }
 `;
 

@@ -2,11 +2,17 @@ import React from "react";
 
 //import CategoryTableInput from './CategoryTableInput';
 
+import styled from '@emotion/styled';
+
+const Td = styled.td`
+    border: 1px solid #eee;
+`;
+
 function Task(props) {
     let columnSettings = props.columnSettings;
     let editingCell = props.editingCell;
     let row = props.currentRow;
-    
+
     const onChangeEditCell = props.onChangeEditCell;
     const onUnFocusCell = () => {
         onChangeEditCell(null, null);
@@ -14,12 +20,12 @@ function Task(props) {
 
     return(
         <tr key={row.id}>
-            <td
+            <Td
                 onClick={(e) => props.onDeleteTask(row.id)}>
                 <i className="fa-solid fa-minus"></i>
-            </td>
+            </Td>
             {Object.entries(row).map(([col, cellValue]) => columnSettings[col].displayed ? (
-            <td 
+            <Td 
                 key={`${row.id}-${col}`}
                 onClick={() => onChangeEditCell(row, col)}>
                 {/* 수정하고자 하는 셀과 일치한다면 수정용 input을 대신 렌더링 */}
@@ -34,7 +40,7 @@ function Task(props) {
                     col={col}
                 />
                 ) :*/ cellValue}
-            </td>
+            </Td>
             ) : "")}
         </tr>
     );

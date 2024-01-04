@@ -59,8 +59,7 @@ function CategoryBar(props) {
         "action": ColorAction,
         "defered": ColorDefered
     };
-
-    console.log(mapCategoryToColor[props.category]);
+    
     return (
         <DropTableDiv css={mapCategoryToColor[props.category]}>
             {props.category.toUpperCase()}

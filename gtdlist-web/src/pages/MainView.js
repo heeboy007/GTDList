@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import Impression from "./MainComponents/Impression";
+import Impression from "../component/Impression";
 
 const MainDiv = styled.div`
     width: 960px;

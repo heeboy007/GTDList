@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import MyButton from "../../common/MyButton";
+import MyButton from "../common/MyButton";
 
 const ImpressionDiv = styled.div`
     display: flex;

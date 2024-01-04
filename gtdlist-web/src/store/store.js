@@ -13,14 +13,14 @@ const defaultTask = {
 };
 
 const tasksReducer = ( state = { tasks: defaultTask }, action ) => {
-    if(action.type === 'CREATE') {
+    if(action.type === 'CREATE_TASK') {
         const newTime = format(new Date(), 'yyyy-MM-dd HH:mm')
         const newTasksCategory = state.tasks[action.category].concat({
             name: '', time:newTime, memo:'', difficulty:"normal", check:false, id: state.newTaskID, order: state.newTaskID
         });
         const newTasks = { ...state.tasks, [action.category]: newTasksCategory};
         return { ...state, tasks: newTasks };
-    } else if (action.type === 'UPDATE') {
+    } else if (action.type === 'UPDATE_TASK') {
         const newTasksCategory = state.tasks[action.category].map((row) => {
             if(row.id === action.rowID) {
                 return { ...row, [action.colID]: action.changedValue };
@@ -29,7 +29,7 @@ const tasksReducer = ( state = { tasks: defaultTask }, action ) => {
         });
         const newTasks = { ...state.tasks, [action.category]: newTasksCategory};
         return { ...state, tasks: newTasks };
-    } else if (action.type === 'DELETE') {
+    } else if (action.type === 'DELETE_TASK') {
         const newTasks = Object.entries(state.tasks).reduce((acc, [category, rows]) => {
             acc[category] = rows.filter(tasks => tasks["id"] !== action.rowID);
             return acc;
@@ -42,7 +42,7 @@ const tasksReducer = ( state = { tasks: defaultTask }, action ) => {
 const defaultNewTaskID = 5;
 
 const newTaskIDReducer = ( state = { newTaskID: defaultNewTaskID }, action ) => {
-    if(action.type === 'INCREMENT') {
+    if(action.type === 'INCREMENT_NEW_TASK_ID') {
         return { ...state, newTaskID: state.newTaskID + 1 };
     }
     return state;
@@ -90,11 +90,43 @@ const columnSettingsReducer = ( state = { columnSettings: defaultColumnSettings 
     return state;
 };
 
+const defaultHiddenTables = {
+    action: false,
+    defered: false
+};
+
+const hiddenTablesReducer = ( state = { hiddenTables : defaultHiddenTables }, action ) => {
+    if(action.type === 'TOGGLE_HIDDEN_TABLE'){
+        return {...state, [action.table]: !state.hiddenTables[action.table]};
+    }
+    return state;
+}
+
+const defaultEditingCell = {
+    rowID: null,
+    colID: null
+};
+
+const editingCellReducer = ( state = { editingCell: defaultEditingCell }, action ) => {
+    if(action.type === 'UPDATE_EDIT_CELL'){
+        return {
+            ...state,
+            editCell: {
+                rowID: action.rowID,
+                colID: action.colID
+            }
+        };
+    }
+    return state;
+}
+
 const store = configureStore({
     reducer: {
         tasksReducer,
         newTaskIDReducer,
-        columnSettingsReducer
+        columnSettingsReducer,
+        hiddenTablesReducer,
+        editingCellReducer
     }
 });
 

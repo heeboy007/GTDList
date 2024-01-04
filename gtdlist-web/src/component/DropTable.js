@@ -2,7 +2,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-const CategoryDiv = styled.div`
+const DropTableDiv = styled.div`
     display: flex;
     flex-direction: row;
     font-size: 1rem;
@@ -15,11 +15,11 @@ const CategoryDiv = styled.div`
 `;
 
 /* section colors */
-const BarColorAction = css`
+const ColorAction = css`
     background: #f15f5f;
 `;
 
-const BarColorDefered = css`
+const ColorDefered = css`
     background: #ffef85;
 `;
 
@@ -56,23 +56,23 @@ const CloseButton = styled.button`
 
 function CategoryBar(props) {
     const mapCategoryToColor = {
-        "action": BarColorAction,
-        "defered": BarColorDefered
+        "action": ColorAction,
+        "defered": ColorDefered
     };
 
     console.log(mapCategoryToColor[props.category]);
     return (
-        <CategoryDiv css={mapCategoryToColor[props.category]}>
+        <DropTableDiv css={mapCategoryToColor[props.category]}>
             {props.category.toUpperCase()}
             {/* task를 더하는 버튼 */}
             <PlusButton onClick={(e) => { props.onAddTask() }}>
                 <i className="fa-solid fa-plus"></i>
             </PlusButton>
             {/* 해당하는 카테고리의 task를 접는 버튼 */}
-            <CloseButton onClick={props.onHideTableChange}>
+            <CloseButton onClick={props.onToggleHideTable}>
                 <i className={"fa-solid fa-caret-down" + (props.hideTable ? " closed" : "")}></i>
             </CloseButton>
-        </CategoryDiv>
+        </DropTableDiv>
     );
 }
 

@@ -5,7 +5,7 @@ function capitalize(str) {
 }
 
 /* Table 위쪽에 Column 명을 뿌리는 역할*/
-function CategoryTableHeader (props) {
+function TaskTableHeader (props) {
     const columnsList = Object.entries(props.columnSettings).map(([col, settings]) => {
         let capCol = capitalize(col);
         return settings.displayed ? <td key={capCol}>{capCol}</td> : "";
@@ -15,10 +15,10 @@ function CategoryTableHeader (props) {
         <thead>
             <tr>
                 <td><i className="fa-solid fa-minus"></i></td>
-                {columnsList}
+                { columnsList }
             </tr>
         </thead>
     );
 }
 
-export default CategoryTableHeader;
+export default TaskTableHeader;

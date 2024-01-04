@@ -1,8 +1,21 @@
 /** @jsxImportSource @emotion/react */
-import { useState, useEffect } from "react";
-import { css } from "@emotion/react";
+import { useEffect } from "react";
+import styled from "@emotion/styled";
 
-import Category from "./ListTaskComponents/Category";
+import Category from "../container/Category";
+
+const TaskViewDiv = styled.div`
+    width: 960px;
+    height: 100%;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: content-box;
+    background: white;
+    overflow-y: auto;
+`;
 
 function TaskView() {
     useEffect(() => {
@@ -26,42 +39,11 @@ function TaskView() {
         };
     }, []);
 
-    const [editCell, setEditRowId] = useState({
-        rowId: null,
-        colId: null
-    });
-
-    const handleEditCellChange = (row, col) => {
-        setEditRowId({
-            rowId: (row === null ? null : row.id),
-            colId: col
-        });
-    };
-
     return (
-        <div 
-            className="listTask"
-            css={css`
-                width: 960px;
-                height: 100%;
-                max-width: 960px;
-                display: flex;
-                flex-direction: column;
-                padding: 0;
-                margin: 0 auto;
-                box-sizing: content-box;
-                background: white;
-                overflow-y: auto;
-            `}>
-            <Category 
-                category={"action"} 
-                editCell={editCell}
-                onEditCellChange={handleEditCellChange}/>
-            <Category 
-                category={"defered"} 
-                editCell={editCell}
-                onEditCellChange={handleEditCellChange}/>
-        </div>
+        <TaskViewDiv>
+            <Category category={"action"}/>
+            <Category category={"defered"}/>
+        </TaskViewDiv>
     );
 }
 

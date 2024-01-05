@@ -22,6 +22,7 @@ function Category(props) {
     let taskRows = props.tasks.map((row) => (
         <Task
             key={row.id}
+            category={category}
             currentRow={row}/>
     ));
 

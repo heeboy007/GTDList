@@ -31,10 +31,9 @@ const tasksReducer = ( state = { tasks: defaultTask }, action ) => {
         const newTasks = { ...state.tasks, [action.category]: newTasksCategory};
         return { ...state, tasks: newTasks };
     } else if (action.type === 'DELETE_TASK') {
-        const newTasks = Object.entries(state.tasks).reduce((acc, [category, rows]) => {
-            acc[category] = rows.filter(tasks => tasks["id"] !== action.rowID);
-            return acc;
-        }, {});
+        console.log(action.category, action.rowID);
+        const newCategoryTasks = state.tasks[action.category].filter(tasks => tasks["id"] !== action.rowID);
+        const newTasks = { ...state.tasks, [action.category]: newCategoryTasks };
         return { ...state, tasks: newTasks };
     }
     return state;
@@ -99,6 +98,7 @@ const defaultEditingCell = {
     rowID: null,
     colID: null
 };
+
 
 const editingCellReducer = ( state = { editingCell: defaultEditingCell }, action ) => {
     if(action.type === 'UPDATE_EDIT_CELL'){

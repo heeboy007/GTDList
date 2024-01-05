@@ -8,17 +8,18 @@ function mapReduxStateToReactProps(state) {
     };
 }
 
-function mapReduxDispatchToReactProps(dispatch) {
+function mapReduxDispatchToReactProps(dispatch, passedProps) {
     return {
         onDeleteTask: function(rowID) {
             dispatch({
-                type:'DELETE', 
-                rowID: rowID
+                type:'DELETE_TASK',
+                rowID: rowID,
+                category: passedProps.category
             });
         },
         onChangeCell: function(rowID, colID, changedValue) {
             dispatch({
-                type:'UPDATE', 
+                type:'UPDATE_TASK', 
                 rowID: rowID, 
                 colID: colID, 
                 changedValue: changedValue

@@ -1,8 +1,11 @@
 import AuthTemplate from "../common/AuthTemplate";
+import LoginForm from "../component/LoginForm";
 
 function LoginView() {
     return (
-        <AuthTemplate></AuthTemplate>
+        <AuthTemplate>
+            <LoginForm></LoginForm>
+        </AuthTemplate>
     );
 }
 

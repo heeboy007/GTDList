@@ -4,6 +4,7 @@ const AuthTemplateDiv = styled.div`
     width: 100%;
     height: 100%;
     background: #f3e5f5;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;

@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import MainView from './pages/MainView';
@@ -13,14 +13,20 @@ height: 100vh;
 `;
 
 function App() {
+    const location = useLocation();
+    const renderHelmetOn = [
+        '/',
+        '/listview',
+    ];
+
     return (
         <AppDiv>
-            <Helmet></Helmet>
+            {renderHelmetOn.includes(location) && <Helmet/>}
             <Routes>
                 <Route path='/' Component={MainView}/>
+                <Route path='/listview' Component={TaskView}/>
                 <Route path='/register' Component={RegisterView}/>
                 <Route path='/login' Component={LoginView}/>
-                <Route path='/listview' Component={TaskView}/>
             </Routes>
         </AppDiv>
     );

@@ -50,8 +50,8 @@ function Helmet() {
         <Nav className="header">
             <NavLink className="logoLink" to="/"><img src={logo} alt="logo"></img></NavLink>
             <div>
-                <NavLink className="menu" to="/menu"><i className="fa-solid fa-bars"></i></NavLink>
-                <NavLink className="thumbnail" to="/profile"><img src={sample_thumbnail} alt="thumbnail"></img></NavLink>
+                <NavLink className="menu" to="/login"><i className="fa-solid fa-bars"></i></NavLink>
+                <NavLink className="thumbnail" to="/register"><img src={sample_thumbnail} alt="thumbnail"></img></NavLink>
             </div>
         </Nav>
     );

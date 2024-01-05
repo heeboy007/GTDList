@@ -8,7 +8,7 @@ import DateTimePicker from 'react-datetime-picker';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
-function CategoryTableInput(props) {
+function TableInput(props) {
     const row = props.row;
     const col = props.col;
     const cellValue = props.cellValue;
@@ -95,4 +95,4 @@ function CategoryTableInput(props) {
     return builtInput;
 }
 
-export default CategoryTableInput;
+export default TableInput;

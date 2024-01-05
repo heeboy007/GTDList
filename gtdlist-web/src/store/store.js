@@ -31,7 +31,6 @@ const tasksReducer = ( state = { tasks: defaultTask }, action ) => {
         const newTasks = { ...state.tasks, [action.category]: newTasksCategory};
         return { ...state, tasks: newTasks };
     } else if (action.type === 'DELETE_TASK') {
-        console.log(action.category, action.rowID);
         const newCategoryTasks = state.tasks[action.category].filter(tasks => tasks["id"] !== action.rowID);
         const newTasks = { ...state.tasks, [action.category]: newCategoryTasks };
         return { ...state, tasks: newTasks };

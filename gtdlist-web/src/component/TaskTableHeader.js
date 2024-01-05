@@ -1,3 +1,8 @@
+import styled from '@emotion/styled';
+
+const Td = styled.td`
+    border: 1px solid #eee;
+`;
 
 function capitalize(str) {
     if(!str) return str;
@@ -8,13 +13,13 @@ function capitalize(str) {
 function TaskTableHeader (props) {
     const columnsList = Object.entries(props.columnSettings).map(([col, settings]) => {
         let capCol = capitalize(col);
-        return settings.displayed ? <td key={capCol}>{capCol}</td> : "";
+        return settings.displayed ? <Td key={capCol}>{capCol}</Td> : "";
     });
 
     return (
         <thead>
             <tr>
-                <td><i className="fa-solid fa-minus"></i></td>
+                <Td><i className="fa-solid fa-minus"></i></Td>
                 { columnsList }
             </tr>
         </thead>

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 function mapReduxStateToReactProps(state) {
     return {
         columnSettings: state.columnSettingsReducer.columnSettings,
-        tasks: state.tasksReducer.tasks
+        tasks: state.tasksReducer.tasks,
+        editingCell: state.editingCellReducer.editingCell
     };
 }
 
@@ -23,6 +24,13 @@ function mapReduxDispatchToReactProps(dispatch, passedProps) {
                 rowID: rowID, 
                 colID: colID, 
                 changedValue: changedValue
+            });
+        },
+        onChangeEditCell: function(rowID, colID){
+            dispatch({
+                type: 'UPDATE_EDIT_CELL',
+                rowID: rowID,
+                colID: colID
             });
         }
     };

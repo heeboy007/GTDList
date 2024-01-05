@@ -103,7 +103,7 @@ const editingCellReducer = ( state = { editingCell: defaultEditingCell }, action
     if(action.type === 'UPDATE_EDIT_CELL'){
         return {
             ...state,
-            editCell: {
+            editingCell: {
                 rowID: action.rowID,
                 colID: action.colID
             }

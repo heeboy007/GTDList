@@ -13,8 +13,7 @@ function Task(props) {
     let editingCell = props.editingCell;
     let row = props.currentRow;
 
-    const onChangeEditCell = props.onChangeEditCell;
-
+    console.log(editingCell);
     return(
         <tr key={row.id}>
             <Td
@@ -24,7 +23,7 @@ function Task(props) {
             {Object.entries(row).map(([col, cellValue]) => columnSettings[col].displayed ? (
             <Td 
                 key={`${row.id}-${col}`}
-                onClick={() => onChangeEditCell(row, col)}>
+                onClick={(e) => props.onChangeEditCell(row.id, col)}>
                 {/* 수정하고자 하는 셀과 일치한다면 수정용 input을 대신 렌더링 */}
                 {(editingCell.rowID === row.id 
                     && editingCell.colID === col) 

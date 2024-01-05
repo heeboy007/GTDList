@@ -9,16 +9,17 @@ const defaultTask = {
     defered:[
         { name: 'Sample Task 3', time:"2023-12-28 08:10", memo:"Sample 3", difficulty:"normal", check:true, id:2, order:1 },
         { name: 'Sample Task 4', time:"2023-12-28 08:10", memo:"Sample 4", difficulty:"easy", check:false, id:3, order:1 }
-    ]
+    ],
+    newTaskID: 5
 };
 
 const tasksReducer = ( state = { tasks: defaultTask }, action ) => {
     if(action.type === 'CREATE_TASK') {
         const newTime = format(new Date(), 'yyyy-MM-dd HH:mm')
         const newTasksCategory = state.tasks[action.category].concat({
-            name: '', time:newTime, memo:'', difficulty:"normal", check:false, id: state.newTaskID, order: state.newTaskID
+            name: '', time:newTime, memo:'', difficulty:"normal", check:false, id: state.tasks.newTaskID, order: state.tasks.newTaskID
         });
-        const newTasks = { ...state.tasks, [action.category]: newTasksCategory};
+        const newTasks = { ...state.tasks, [action.category]: newTasksCategory, newTaskID: state.tasks.newTaskID + 1 };
         return { ...state, tasks: newTasks };
     } else if (action.type === 'UPDATE_TASK') {
         const newTasksCategory = state.tasks[action.category].map((row) => {
@@ -35,15 +36,6 @@ const tasksReducer = ( state = { tasks: defaultTask }, action ) => {
             return acc;
         }, {});
         return { ...state, tasks: newTasks };
-    }
-    return state;
-};
-
-const defaultNewTaskID = 5;
-
-const newTaskIDReducer = ( state = { newTaskID: defaultNewTaskID }, action ) => {
-    if(action.type === 'INCREMENT_NEW_TASK_ID') {
-        return { ...state, newTaskID: state.newTaskID + 1 };
     }
     return state;
 };
@@ -123,7 +115,6 @@ const editingCellReducer = ( state = { editingCell: defaultEditingCell }, action
 const store = configureStore({
     reducer: {
         tasksReducer,
-        newTaskIDReducer,
         columnSettingsReducer,
         hiddenTablesReducer,
         editingCellReducer

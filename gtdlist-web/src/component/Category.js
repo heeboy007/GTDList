@@ -19,6 +19,7 @@ table {
 function Category(props) {
     const category = props.category;
     
+    console.log(props.tasks);
     //각각의 task에 대한 Component를 생성
     let taskRows = props.tasks.map((row) => (
         <Task

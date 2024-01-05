@@ -1,7 +1,8 @@
+import AuthTemplate from "../common/AuthTemplate";
 
 function RegisterView() {
     return (
-        <div></div>
+        <AuthTemplate></AuthTemplate>
     );
 }
 

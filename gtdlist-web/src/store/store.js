@@ -89,7 +89,8 @@ const defaultHiddenTables = {
 
 const hiddenTablesReducer = ( state = { hiddenTables : defaultHiddenTables }, action ) => {
     if(action.type === 'TOGGLE_HIDDEN_TABLE'){
-        return {...state, [action.table]: !state.hiddenTables[action.table]};
+        const newHiddenTable = { ...state.hiddenTables, [action.category]: !state.hiddenTables[action.category] };
+        return { hiddenTables: newHiddenTable };
     }
     return state;
 }

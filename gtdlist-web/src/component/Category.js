@@ -18,8 +18,6 @@ table {
 
 function Category(props) {
     const category = props.category;
-    
-    console.log(props.tasks);
     //각각의 task에 대한 Component를 생성
     let taskRows = props.tasks.map((row) => (
         <Task
@@ -30,7 +28,7 @@ function Category(props) {
     return (
         <Section className={category}>
             <DropTable category={category}/>
-            { props.hideTa ? "" : <table>
+            { props.hideTable ? "" : <table>
                 <TaskTableHeader />
                 {/* 누르면 바로 수정 / 저장이 가능한 테이블을 작성 */}
                 <tbody>

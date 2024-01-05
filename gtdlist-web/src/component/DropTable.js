@@ -68,7 +68,9 @@ function CategoryBar(props) {
                 <i className="fa-solid fa-plus"></i>
             </PlusButton>
             {/* 해당하는 카테고리의 task를 접는 버튼 */}
-            <CloseButton onClick={props.onToggleHideTable}>
+            <CloseButton onClick={(e) => { 
+                props.onToggleHideTable();
+            }}>
                 <i className={"fa-solid fa-caret-down" + (props.hideTable ? " closed" : "")}></i>
             </CloseButton>
         </DropTableDiv>

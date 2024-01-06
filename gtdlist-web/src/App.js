@@ -21,7 +21,7 @@ function App() {
 
     return (
         <AppDiv>
-            {renderHelmetOn.includes(location) && <Helmet/>}
+            {renderHelmetOn.includes(location.pathname) && <Helmet/>}
             <Routes>
                 <Route path='/' Component={MainView}/>
                 <Route path='/listview' Component={TaskView}/>

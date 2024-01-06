@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
 import { NavLink } from 'react-router-dom';
 
 const StyledNavLink = styled(NavLink)`
@@ -9,27 +8,27 @@ const StyledNavLink = styled(NavLink)`
     font-size: 20px;
     padding: 10px 30px;
     border-radius: 15px;
-`;
 
-const RedButtonStyle = css`
-    color: white;
-    background-color: #ff1744;
-`;
+    &.mybutton-red {
+        color: white;
+        background-color: #ff1744;
+    }
 
-const GrayButtonStyle = css`
-    background-color: #eee;
+    &.mybutton-gray {
+        background-color: #eee;
+    }
 `;
 
 function MyButton(props) {
     const color = props.color || 'red';
     const mapColorToStyle = {
-        "red": RedButtonStyle,
-        "gray": GrayButtonStyle
+        "red": 'mybutton-red',
+        "gray": 'mybutton-gray'
     };
 
     return (
         <StyledNavLink
-            css={mapColorToStyle[color]}
+            className={mapColorToStyle[color]}
             to={props.to}
             onClick={(e) => {
                 if(props.onClick !== undefined)

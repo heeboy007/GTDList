@@ -1,8 +1,11 @@
 import AuthTemplate from "../common/AuthTemplate";
+import RegisterForm from "../component/RegisterForm";
 
 function RegisterView() {
     return (
-        <AuthTemplate></AuthTemplate>
+        <AuthTemplate>
+            <RegisterForm></RegisterForm>
+        </AuthTemplate>
     );
 }
 

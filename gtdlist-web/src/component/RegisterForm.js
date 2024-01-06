@@ -48,20 +48,22 @@ const Label = styled.label`
     padding: 12px 0;
 `;
 
-function LoginForm(props) {
+function RegisterForm(props) {
     return(
         <StyledForm>
             <Logo src={logo} alt='logo'></Logo>
-            Sign In To FlowForge.
+            Register To FlowForge.
             <StyledDiv>
                 <Label>Username or Email Address</Label>
                 <Input type='username' name='username'></Input>
                 <Label>Password</Label>
                 <Input type='password' name='password'></Input>
-                <MyButton>Sign In</MyButton>
+                <Label>Confirm Password</Label>
+                <Input type='password' name='password-confirm'></Input>
+                <MyButton>Register</MyButton>
             </StyledDiv>
         </StyledForm>
     );
 }
 
-export default LoginForm;
+export default RegisterForm;

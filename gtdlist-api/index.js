@@ -1,14 +1,33 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
+const { sequelize } = require('./databaase');
 
-const app = express();
-const port = 3000;
+const { PORT } = process.env;
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+async function launchServer(){
+    const app = express();
+    const port = PORT || 8000;
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-    console.log(`http://localhost:${port}`);
-});
+    app.use(bodyParser.json());
+
+    app.get('/', (req, res) => {
+        res.json({ message: 'Hello CoronaBoard!' });
+    });
+
+    try {
+        await sequelize.sync();
+        console.log('API : DB Ready');
+    } catch (error) {
+        console.log('API : Unable to connect with database');
+        console.log(error);
+        process.exit(1);
+    }
+
+    app.listen(port, () => {
+        console.log(`API : Experess server ready on port ${port}`);
+    })
+}
+
+launchServer();

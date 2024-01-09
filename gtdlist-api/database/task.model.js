@@ -1,6 +1,6 @@
-const { DataTypes } = require('sequelize');
+import { DataTypes } from 'sequelize';
 
-module.exports = (sequelize) => {
+export default (sequelize) => {
     return sequelize.define(
         'Task',
         {
@@ -54,4 +54,4 @@ module.exports = (sequelize) => {
             timestamps: true
         }
     );
-}
+};

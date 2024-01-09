@@ -1,5 +1,5 @@
-const { User } = require('../databaase');
-const bcrypt = require('bcrypt');
+import { User } from '../database/index.js';
+import bcrypt from 'bcrypt';
 
 //유저 정보 확인
 function validate(body) {
@@ -43,63 +43,55 @@ function validate(body) {
 }
 
 // 유저 전체 조회
-async function getAll(req, res) {
+async function userGetAll(req, res) {
     const result = await User.findAll();
     res.status(200).json({ result });
     console.log("API : user.controller.js : getAll");
 }
 
 // 회원가입, 일반 이메일 주소
-async function register(req, res) {
-    try {
-        const result = validate(req.body);
-        if(result.error) {
-            res.status(400).json({ result: result });
-        }
-        //passed validation
-        const { email, password } = req.body;
-        const saltRounds = 10 // 해싱 횟수
+async function userRegister(req, res) {
+    const result = validate(req.body);
+    if(result.error) {
+        res.status(400).json({ result: result });
+    }
+    //passed validation
+    const { email, password } = req.body;
+    const saltRounds = 10 // 해싱 횟수
 
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const newUser = await User.create({
-            email,
-            password: hashedPassword,
-            account_login_method: "normal",
-            email_verfiy_token: "blah"
-        });
+    const newUser = await User.create({
+        email,
+        password: hashedPassword,
+        account_login_method: "normal",
+        email_verfiy_token: "blah"
+    });
 
-        res.status(201).json({ result: 'user creation success' });
-    } catch (error) {
-        res.status(500).json({ result: 'error registering user' });
+    res.status(201).json({ result: 'user creation success' });
+}
+
+async function userLogin(req, res) {
+    const result = validate(req.body);
+    if(result.error) {
+        res.status(401).json({ result: 'authentication failed' });
+    }
+    const { email, password } = req.body;
+    
+    const user = await User.findOne({ where: { email }});
+    if(!user) {
+        res.status(401).json({ result: 'authentication failed' });
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if(match) {
+        res.status(200).json({ result: 'login successful' });
+    } else {
+        res.status(401).json({ result: 'authentication failed' });
     }
 }
 
-async function login(req, res) {
-    try {
-        const result = validate(req.body);
-        if(result.error) {
-            res.status(401).json({ result: 'authentication failed' });
-        }
-        const { email, password } = req.body;
-        
-        const user = await User.findOne({ where: { email }});
-        if(!user) {
-            res.status(401).json({ result: 'authentication failed' });
-        }
-
-        const match = await bcrypt.compare(password, user.password);
-        if(match) {
-            res.status(200).json({ result: 'login successful' });
-        } else {
-            res.status(401).json({ result: 'authentication failed' });
-        }
-    } catch (error) {
-        res.status(500).json({ result: 'error authenticating user' });
-    }
-}
-
-async function update(req, res) {
+async function userUpdate(req, res) {
     const { email } = req.body;
     if(!email) {
         res.status(400).json({ error: 'bad request : email are required' });
@@ -117,7 +109,7 @@ async function update(req, res) {
     res.status(200).json({ result:'success' });
 }
 
-async function remove(req, res){
+async function userRemove(req, res){
     const { email } = req.body;
     if(!email) {
         res.status(400).json({ error: 'bad request : email are required' });
@@ -127,10 +119,10 @@ async function remove(req, res){
     await User.destroy({where: { email }});
 }
 
-module.exports = {
-    getAll,
-    register,
-    login,
-    remove,
-    update
-}
+export {
+    userGetAll,
+    userRegister,
+    userLogin,
+    userRemove,
+    userUpdate
+};

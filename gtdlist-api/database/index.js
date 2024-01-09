@@ -1,6 +1,10 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+import userModel from './user.model.js';
+import taskModel from './task.model.js';
 
-const { Sequelize } = require('sequelize');
+dotenv.config();
+
+import { Sequelize } from 'sequelize';
 
 const { DB_URL, DB_USER, GTD_DB_PASSWORD } = process.env;
 
@@ -12,15 +16,12 @@ const config = {
     password: GTD_DB_PASSWORD
 }
 
-console.log(config);
-
 const sequelize = new Sequelize(config.database, config.user, config.password, {
     host: config.host,
     dialect: 'mysql'
 });
 
-module.exports = {
-    sequelize,
-    Task: require('./task.model')(sequelize),
-    User: require('./user.model')(sequelize),
-}
+const Task = taskModel(sequelize);
+const User = userModel(sequelize);
+
+export { sequelize, Task, User };

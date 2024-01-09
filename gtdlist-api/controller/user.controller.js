@@ -1,5 +1,9 @@
 import { User } from '../database/index.js';
+import { add } from 'date-fns';
+import Joi from 'joi';
 import bcrypt from 'bcrypt';
+
+const saltRounds = 10 // 해싱 횟수
 
 //유저 정보 확인
 function validate(body) {
@@ -34,7 +38,8 @@ function validate(body) {
     const result = schema.validate(body);
     if (result.error){
         //regex를 여러 개 적용할 때는 messages를 이용한 타입 감별만으로는 커스텀 메시지를 만들 수 없음.
-        //따라서 name 필드를 메시지로 이용, name => message로 포팅해서 front-end에 메시지를 전달.  
+        //따라서 name 필드를 메시지로 이용, name => message로 포팅해서 front-end에 메시지를 전달.
+        console.log("API : user.controller.js : validation error");
         if(result.error.details[0].type === 'string.pattern.name'){
             result.error.details[0].message = result.error.details[0].context.name;
         }
@@ -44,79 +49,98 @@ function validate(body) {
 
 // 유저 전체 조회
 async function userGetAll(req, res) {
-    const result = await User.findAll();
-    res.status(200).json({ result });
     console.log("API : user.controller.js : getAll");
+    const result = await User.findAll();
+    return res.status(200).json({ result });
 }
 
 // 회원가입, 일반 이메일 주소
 async function userRegister(req, res) {
+    console.log("API : user.controller.js : register");
+    
+    //passed validation
     const result = validate(req.body);
     if(result.error) {
-        res.status(400).json({ result: result });
+        return res.status(400).json({ result: result });
+    } else {
+        console.log("API : custom validation clear");
     }
-    //passed validation
+
+    //여기서 부터 body의 값을 언패킹합니다.
     const { email, password } = req.body;
-    const saltRounds = 10 // 해싱 횟수
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const after_3_months = add(new Date(),  { days: 90 });
 
     const newUser = await User.create({
         email,
         password: hashedPassword,
         account_login_method: "normal",
-        email_verfiy_token: "blah"
+        password_invalidate: after_3_months
     });
 
-    res.status(201).json({ result: 'user creation success' });
+    return res.status(201).json({ result: 'user creation success' });
 }
 
 async function userLogin(req, res) {
+    console.log("API : user.controller.js : login");
     const result = validate(req.body);
     if(result.error) {
-        res.status(401).json({ result: 'authentication failed' });
+        return res.status(401).json({ result: 'authentication failed' });
     }
     const { email, password } = req.body;
     
     const user = await User.findOne({ where: { email }});
     if(!user) {
-        res.status(401).json({ result: 'authentication failed' });
+        return res.status(401).json({ result: 'authentication failed' });
     }
 
     const match = await bcrypt.compare(password, user.password);
     if(match) {
-        res.status(200).json({ result: 'login successful' });
+        return res.status(200).json({ result: 'login successful' });
     } else {
-        res.status(401).json({ result: 'authentication failed' });
+        return res.status(401).json({ result: 'authentication failed' });
     }
 }
 
 async function userUpdate(req, res) {
+    console.log("API : user.controller.js : update");
     const { email } = req.body;
     if(!email) {
-        res.status(400).json({ error: 'bad request : email are required' });
-        console.log("API : user.controller.js : bad request(insertOrUpdate) : " + email);
-        return;
+        console.log("API : user.controller.js : bad request(update) : " + email);
+        return res.status(400).json({ error: 'bad request : email are required' });
     }
 
     const count = await User.count({ where: { email }});
     if(count === 0){
-        res.status(401).json({ error: 'bad request : user does not exist' });
+        return res.status(401).json({ error: 'bad request : user does not exist' });
     } else {
         await User.update(req.body, { where: { email }});
     }
 
-    res.status(200).json({ result:'success' });
+    return res.status(200).json({ result:'success' });
 }
 
 async function userRemove(req, res){
-    const { email } = req.body;
-    if(!email) {
-        res.status(400).json({ error: 'bad request : email are required' });
-        console.log("API : user.controller.js : bad request(remove) : " + email);
+    console.log("API : user.controller.js : remove");
+    const result = validate(req.body);
+    if(result.error) {
+        return res.status(401).json({ result: 'authentication failed' });
     }
+    const { email, password } = req.body;
+    if(!email || !password) {
+        res.status(400).json({ error: 'bad request : email/password are required' });
+        console.log("API : user.controller.js : remove/bad request detected " + email);
+    }
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    await User.destroy({where: { email }});
+    await User.destroy({
+        where: {
+            email, 
+            password: hashedPassword 
+        }
+    });
+    return res.status(200).json({ result:'success' });
 }
 
 export {

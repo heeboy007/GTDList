@@ -14,6 +14,10 @@ export default (sequelize) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
             profile_image_url: {
                 type: DataTypes.STRING,
             },
@@ -30,9 +34,6 @@ export default (sequelize) => {
                 values: ['active', 'closed', 'email_verfiy_needed', 'suspended'],
                 defaultValue: 'email_verfiy_needed',
                 allowNull: false
-            },
-            email_verfiy_token: {
-                type: DataTypes.STRING,
             },
             password_invalidate: {
                 type: DataTypes.DATE,
@@ -79,9 +80,9 @@ export default (sequelize) => {
                     fields: [{ name: 'id' }]
                 },
                 {
-                    name: 'email',
+                    name: 'emailwithPassword',
                     unique: true,
-                    fields: [{ name: 'email' }]
+                    fields: [{ name: 'email' }, { name: 'password' }]
                 },
             ],
             timestamps: true

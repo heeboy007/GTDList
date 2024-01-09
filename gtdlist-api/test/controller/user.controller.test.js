@@ -1,6 +1,6 @@
-const expect = require('chai').expect;
-const request = require('supertest');
-import app from '../../app';
+import { expect } from 'chai';
+import request from 'supertest';
+import app from '../../app.js';
 
 describe('POST /user/register', () => {
     it('registers proper email/password with status 200', (done) => {

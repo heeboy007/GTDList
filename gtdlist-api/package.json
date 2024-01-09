@@ -5,7 +5,7 @@
   "description": "Getting Things Done List. (API SERVER)",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --loader ts-node/esm 'test/**/*.test.js'"
+    "test": "mocha 'test/**/*.test.js'"
   },
   "author": "",
   "license": "ISC",

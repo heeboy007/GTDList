@@ -2,6 +2,7 @@ import { User } from '../database/index.js';
 import { add } from 'date-fns';
 import Joi from 'joi';
 import bcrypt from 'bcrypt';
+import wrapWithErrorHandler from '../util/errorHandler.js';
 
 const saltRounds = 10 // 해싱 횟수
 
@@ -143,10 +144,10 @@ async function remove(req, res){
     return res.status(200).json({ result:'success' });
 }
 
-export default {
+export default wrapWithErrorHandler({
     getAll,
     register,
     login,
     remove,
     update
-};
+});

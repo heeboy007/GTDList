@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 import { sequelize } from './database/index.js';
-import { userGetAll, userRegister, userLogin, userRemove, userUpdate } from './controller/user.controller.js';
+import User from './controller/user.controller.js';
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,11 +21,11 @@ async function configureServer(app){
         res.json({ message: 'API server is online' });
     });
 
-    app.get('/user', userGetAll);
-    app.post('/user/register', userRegister);
-    app.post('/user/login', userLogin);
-    app.post('/user', userUpdate);
-    app.delete('/user', userRemove);
+    app.get('/user', User.getAll);
+    app.post('/user/register', User.register);
+    app.post('/user/login', User.login);
+    app.post('/user', User.update);
+    app.delete('/user', User.remove);
 
     console.log('API : Connected controllers to express');
 }

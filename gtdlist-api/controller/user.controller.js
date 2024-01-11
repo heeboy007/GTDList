@@ -48,14 +48,14 @@ function validate(body) {
 }
 
 // 유저 전체 조회
-async function userGetAll(req, res) {
+async function getAll(req, res) {
     console.log("API : user.controller.js : getAll");
     const result = await User.findAll();
     return res.status(200).json({ result });
 }
 
 // 회원가입, 일반 이메일 주소
-async function userRegister(req, res) {
+async function register(req, res) {
     console.log("API : user.controller.js : register");
     
     //passed validation
@@ -82,7 +82,7 @@ async function userRegister(req, res) {
     return res.status(201).json({ result: 'user creation success' });
 }
 
-async function userLogin(req, res) {
+async function login(req, res) {
     console.log("API : user.controller.js : login");
     const result = validate(req.body);
     if(result.error) {
@@ -103,7 +103,7 @@ async function userLogin(req, res) {
     }
 }
 
-async function userUpdate(req, res) {
+async function update(req, res) {
     console.log("API : user.controller.js : update");
     const { email } = req.body;
     if(!email) {
@@ -121,7 +121,7 @@ async function userUpdate(req, res) {
     return res.status(200).json({ result:'success' });
 }
 
-async function userRemove(req, res){
+async function remove(req, res){
     console.log("API : user.controller.js : remove");
     const result = validate(req.body);
     if(result.error) {
@@ -143,10 +143,10 @@ async function userRemove(req, res){
     return res.status(200).json({ result:'success' });
 }
 
-export {
-    userGetAll,
-    userRegister,
-    userLogin,
-    userRemove,
-    userUpdate
+export default {
+    getAll,
+    register,
+    login,
+    remove,
+    update
 };

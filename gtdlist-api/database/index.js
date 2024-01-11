@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import userModel from './user.model.js';
 import taskModel from './task.model.js';
+import emailVerfificationTokenModel from './email-verification-token.model.js';
 
 dotenv.config();
 
@@ -23,5 +24,6 @@ const sequelize = new Sequelize(config.database, config.user, config.password, {
 
 const Task = taskModel(sequelize);
 const User = userModel(sequelize);
+const EmailVerificationToken = emailVerfificationTokenModel(sequelize);
 
-export { sequelize, Task, User };
+export { sequelize, Task, User, EmailVerificationToken };

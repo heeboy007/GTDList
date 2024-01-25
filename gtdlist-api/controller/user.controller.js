@@ -114,7 +114,7 @@ async function update(req, res) {
 
     const count = await User.count({ where: { email }});
     if(count === 0){
-        return res.status(401).json({ error: 'bad request : user does not exist' });
+        return res.status(401).json({ error: 'unauthorized : user does not exist' });
     } else {
         await User.update(req.body, { where: { email }});
     }

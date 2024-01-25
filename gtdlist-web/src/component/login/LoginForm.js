@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
-import logo from '../resources/FlowForge.svg';
-import MyButton from '../common/MyButton';
+import logo from '../../resources/FlowForge.svg';
+import MyButton from '../../common/MyButton';
 
 const StyledForm = styled.form`
     width: 600px;

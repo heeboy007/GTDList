@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 function mapReduxStateToReactProps(state) {
     return {
-        columnSettings: state.columnSettingsReducer.columnSettings
+        columnSettings: state.taskReducer.columnSettings
     };
 };
 

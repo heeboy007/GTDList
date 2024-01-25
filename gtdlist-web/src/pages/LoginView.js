@@ -1,5 +1,5 @@
 import AuthTemplate from "../common/AuthTemplate";
-import LoginForm from "../component/LoginForm";
+import LoginForm from "../component/login/LoginForm";
 
 function LoginView() {
     return (

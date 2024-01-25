@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 function mapReduxStateToReactProps(state, passedProps) {
     return {
-        tasks: state.tasksReducer.tasks[passedProps.category],
-        hideTable: state.hiddenTablesReducer.hiddenTables[passedProps.category]
+        tasks: state.taskReducer.tasks[passedProps.category],
+        hideTable: state.taskReducer.hiddenTables[passedProps.category]
     };
 }
 

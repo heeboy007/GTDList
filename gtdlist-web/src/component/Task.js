@@ -13,7 +13,7 @@ function Task(props) {
     let editingCell = props.editingCell;
     let row = props.currentRow;
 
-    console.log(editingCell);
+    //console.log(editingCell);
     return(
         <tr key={row.id}>
             <Td

@@ -4,3 +4,6 @@ node_modules/
 
 #environment variables
 .env
+
+#some cmd test file notes
+*.testsh

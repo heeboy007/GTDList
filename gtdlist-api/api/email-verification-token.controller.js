@@ -1,10 +1,10 @@
 import { result } from "lodash";
 import { EmailVerificationToken  } from "../database";
 import wrapWithErrorHandler from "../util/errorHandler";
-import tokenGen from "../util/tokenGen";
+import { tokenGen } from "../util/token";
 import { add } from "date-fns";
 
-async function generateToken(req, res){
+async function generateVerifyToken(req, res){
     const user_id_number = req.body.user_id;
 
     try {
@@ -32,5 +32,5 @@ async function verifiy(req, res) {
 }
 
 export default wrapWithErrorHandler({
-    generateToken
+    generateVerifyToken
 })

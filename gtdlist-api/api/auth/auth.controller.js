@@ -1,8 +1,9 @@
-import { User } from '../database/index.js';
+import { User } from '../../database/index.js';
 import { add } from 'date-fns';
 import Joi from 'joi';
 import bcrypt from 'bcrypt';
-import wrapWithErrorHandler from '../util/errorHandler.js';
+import wrapWithErrorHandler from '../../util/errorHandler.js';
+import { generateJWTToken } from '../../util/jwtMiddleware.js';
 
 const saltRounds = 10 // 해싱 횟수
 
@@ -49,11 +50,11 @@ function validate(body) {
 }
 
 // 유저 전체 조회
-async function getAll(req, res) {
+/*async function getAll(req, res) {
     console.log("API : user.controller.js : getAll");
     const result = await User.findAll();
     return res.status(200).json({ result });
-}
+}*/
 
 // 회원가입, 일반 이메일 주소
 async function register(req, res) {
@@ -62,11 +63,8 @@ async function register(req, res) {
     //passed validation
     const result = validate(req.body);
     if(result.error) {
-        return res.status(400).json({ result: result });
-    } else {
-        console.log("API : custom validation clear");
+        return res.status(400).json({ authError: result });
     }
-
     //여기서 부터 body의 값을 언패킹합니다.
     const { email, password } = req.body;
 
@@ -80,31 +78,37 @@ async function register(req, res) {
         password_invalidate: after_3_months
     });
 
-    return res.status(201).json({ result: 'user creation success' });
+    return res.status(201).json({ auth: 'user creation success' });
 }
 
 async function login(req, res) {
     console.log("API : user.controller.js : login");
     const result = validate(req.body);
     if(result.error) {
-        return res.status(401).json({ result: 'authentication failed' });
+        return res.status(401).json({ authError: 'authentication failed' });
     }
     const { email, password } = req.body;
-    
+
     const user = await User.findOne({ where: { email }});
     if(!user) {
-        return res.status(401).json({ result: 'authentication failed' });
+        return res.status(401).json({ authError: 'authentication failed' });
     }
 
     const match = await bcrypt.compare(password, user.password);
     if(match) {
-        return res.status(200).json({ result: 'login successful' });
+        const token = generateJWTToken(email);
+        res.cookie('access_token', token, { 
+            maxAge: 1000 * 60 * 60 * 24, //1day
+            httpOnly: true,
+            //secure: true
+        });
+        return res.status(200).json({ auth: token });
     } else {
-        return res.status(401).json({ result: 'authentication failed' });
+        return res.status(401).json({ authError: 'authentication failed' });
     }
 }
 
-async function update(req, res) {
+/*async function update(req, res) {
     console.log("API : user.controller.js : update");
     const { email } = req.body;
     if(!email) {
@@ -142,12 +146,26 @@ async function remove(req, res){
         }
     });
     return res.status(200).json({ result:'success' });
+}*/
+
+async function check(req, res) {
+    //get user from middleware
+    const { user } = req.userState;
+    if(!user) {
+        return res.status(401);
+    }
+    return res.send(user);
+}
+
+async function logout(req, res) {
+    //cookie set
+    res.clearCookie('access_token');
+    return res.status(204);
 }
 
 export default wrapWithErrorHandler({
-    getAll,
     register,
     login,
-    remove,
-    update
+    check,
+    logout,
 });

@@ -1,11 +1,11 @@
 import client from "./client";
 
-const login = ({ username, password }) => {
-    client.post('/user/login', { username, password });
+const login = ({ email, password }) => {
+    client.post('/user/login', { email, password });
 }
 
-const register = ({ username, password }) => {
-    client.post('/user/register', { username, password });
+const register = ({ email, password }) => {
+    client.post('/user/register', { email, password });
 }
 
 const check = () => {

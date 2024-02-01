@@ -17,7 +17,7 @@ describe('POST /user/register', () => {
     });
 });
 
-describe('DELETE /user', () => {
+/*describe('DELETE /user', () => {
     it('deletes user with proper email with status 200', (done) => {
         request(app)
             .delete('/user')
@@ -30,4 +30,4 @@ describe('DELETE /user', () => {
                 done();
             });
     });
-});
+});*/

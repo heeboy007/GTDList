@@ -26,7 +26,7 @@ async function configureServer(app){
         res.status(204).json({ nocont: 'No Content' });
     });
 
-    app.route(authRouter);
+    app.use('/user', authRouter);
 
     console.log('Connected routers to express.');
 }

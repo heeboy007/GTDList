@@ -23,16 +23,16 @@ export const initalizeForm = createAction(
 
 export const register = createAction(
     authActions.REGISTER, 
-    ({ username, password }) => ({
-        username,
+    ({ email, password }) => ({
+        email,
         password
     })
 );
 
 export const login = createAction(
     authActions.LOGIN,
-    ({ username, password }) => ({
-        username,
+    ({ email, password }) => ({
+        email,
         password
     })
 );
@@ -49,13 +49,13 @@ export function* authSaga() {
 // reducer
 const defaultState = {
     register: {
-        username: '',
+        email: '',
         password: '',
         passwordConfirm: ''
     },
     login: {
-    username: '',
-    password: ''
+        email: '',
+        password: ''
     },
     auth: null,
     authError: null

@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "useDefineForClassFields": true,
+    "module": "CommonJS",
+    "lib": ["ES6", "DOM", "DOM.Iterable", "ScriptHost"],
+    "skipLibCheck": true,
+
+    // /* Bundler mode */
+    // "moduleResolution": "bundler",
+    // "allowImportingTsExtensions": true,
+    // "resolveJsonModule": true,
+    // "isolatedModules": true,
+    // "noEmit": true,
+    
+    // "allowJS": true, /* even compile js too! */
+    // "checkJS": true, /* Report errors in .js file */
+    // "jsx": "preserve", /* react i guess */
+    "sourceMap": true, /* browser source will know understand .ts files too! */
+    "outDir": "./dist", /* redirect compiled js to somewhere. */
+    "rootDir": "./src", /* specify the root directory of input files. */
+    "removeComments": true, /* remove any comments to the compiled js files. */ 
+    // "downlevelIteration": true, /* enables full support for es5, es6 iterable compileations */
+    "noEmitOnError": true, /* disable emit on error, prevent generating fault js files */
+
+    /* Linting */
+    "strict": true, /* a lot of things combined. */
+    //"noImplicitAny": true,
+    //"strictNullChecks": true,
+    //"strictFunctionTypes": true,
+    //"strictBindCallApply": true,
+    //"strictPropertyInitialization": true,
+    //"noImplicitThis": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true
+  },
+}

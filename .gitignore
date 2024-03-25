@@ -7,3 +7,6 @@ node_modules/
 
 #some cmd test file notes
 *.testsh
+
+#tsc compiled js files
+dist/

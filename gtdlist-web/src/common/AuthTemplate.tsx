@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import React = require('react');
 
 const AuthTemplateDiv = styled.div`
     width: 100%;
@@ -10,10 +11,14 @@ const AuthTemplateDiv = styled.div`
     justify-content: center;
 `;
 
-function AuthTemplate(props) {
+interface HasChildren {
+    children: [];
+}
+
+const AuthTemplate : React.FC = (props) => {
     return(
         <AuthTemplateDiv>
-            {props.children}
+            {(props as HasChildren).children}
         </AuthTemplateDiv>
     );
 }

@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "target": "ES6",
+    "target": "ES2017",
     "useDefineForClassFields": true,
-    "module": "CommonJS",
+    "module": "ESNext",
+    "moduleResolution": "node",     // add this line.
     "lib": ["ES6", "DOM", "DOM.Iterable", "ScriptHost"],
     "skipLibCheck": true,
+    "esModuleInterop": true,
 
     // /* Bundler mode */
     // "moduleResolution": "bundler",
@@ -23,6 +24,7 @@
     "removeComments": true, /* remove any comments to the compiled js files. */ 
     // "downlevelIteration": true, /* enables full support for es5, es6 iterable compileations */
     "noEmitOnError": true, /* disable emit on error, prevent generating fault js files */
+    //"noEmit": true,
 
     /* Linting */
     "strict": true, /* a lot of things combined. */
@@ -33,9 +35,12 @@
     //"strictPropertyInitialization": true,
     //"noImplicitThis": true,
 
+    //Enable decorators
+    "experimentalDecorators": true,
+
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
-  },
+  }
 }

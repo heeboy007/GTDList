@@ -1,4 +1,4 @@
-import BuildConfigurable from "./buildConfigureable";
+import BuildConfigurable from "./BuildConfigureable";
 import { DataTypes } from "sequelize";
 
 const taskBuildConfig: BuildConfigurable = [
@@ -50,7 +50,8 @@ const taskBuildConfig: BuildConfigurable = [
                 fields: [{ name: 'user_id' }]
             },
         ],
-        timestamps: true
+        timestamps: true,
+        paranoid: true,
     }
 ];
 

@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import BuildConfigurable from './buildConfigureable';
+import BuildConfigurable from './BuildConfigureable';
 
 const userModelConfig: BuildConfigurable = [
     'User',
@@ -84,7 +84,8 @@ const userModelConfig: BuildConfigurable = [
                 fields: [{ name: 'email' }, { name: 'password' }]
             },
         ],
-        timestamps: true
+        timestamps: true,
+        paranoid: true
     }
 ];
 

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
+    "bcrypt": "^5.1.1"
+  }
+}

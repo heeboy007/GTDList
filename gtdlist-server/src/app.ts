@@ -1,11 +1,11 @@
 import express, { Express, Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
+import LogLinker from './application/middleware/LogLinker';
 
 const app: Express = express();
 
 app.use(bodyParser.json());
-app.use(cookieParser());
+app.use(LogLinker);
 
 async function configureServer(app: Express){
     try {

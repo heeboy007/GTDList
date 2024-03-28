@@ -1,30 +1,49 @@
-import { Sequelize } from 'sequelize';
+import { Model, Sequelize } from 'sequelize';
 import userBuildConfig from './seqbuild/User.buildconfig';
-import Buildable from './buildable';
-import BuiltModel from './BuiltModel';
+import { UserData, UserDataInput } from '../dataset/User.dataset';
 
-class UserDB implements Buildable {
+class UserDB extends Model<UserData, UserDataInput> implements UserData {
+
+    public id!: number;
+    public email!: string;
+    public password!: string;
+    public account_login_method!: LoginMethods;
+    public account_state!: AccountState;
+    public password_invalidation_date!: Date;
+
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+    public readonly deletedAt!: Date;
+
+    private isSeqLinked: boolean = false;
+
     //TODO maybe have to set this not just "any" here...
-    private builtModel?: BuiltModel;
-
-    build(sequelize: Sequelize): BuiltModel {
-        let [ tableName, columns, indexes ]: [string, any, any] = userBuildConfig;
+    static linkSequelize(sequelize: Sequelize) {
+        let [ _, columns, indexes ]: [string, any, any] = userBuildConfig;
         indexes = { 
             ...indexes,
             sequelize: sequelize
         };
-        return sequelize.define(tableName, columns, indexes);
+        UserDB.init(columns, indexes);
     };
 
-    getBuiltModel(): BuiltModel | void {
-        if(this.builtModel)
-            return this.builtModel;
-        else
-            return;
-    }
+    async fetchLoginAttemptUser(email: string): Promise<UserData | null> {
+        if(!this.isSeqLinked)  {
+            Log.E('The model is not linked yet...');
+            return null;
+        }
 
-    debugIfItsAlreadyBuilt(): boolean {
-        return !!this.builtModel;
+        //TODO : have no idea what this type is
+        const user: UserData | null = await UserDB.findOne({
+            where: { email }
+        });
+
+        if(!user) {
+            Log.E('User Model was not fetchable.');
+            return null;
+        }
+
+        return user;
     }
 }
 

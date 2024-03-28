@@ -26,7 +26,8 @@ type BuildConfigurable = [
             unique: boolean,
             fields: { name: string }[]
         }[],
-        timestamps: boolean
+        timestamps: boolean,
+        paranoid: true,
     }
 ]
 

@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 import taskBuildConfig from './seqbuild/Task.buildconfig';
-import Buildable from './buildable';
+import Buildable from './Buildable';
 import BuiltModel from './BuiltModel';
 
 class TaskDB implements Buildable {

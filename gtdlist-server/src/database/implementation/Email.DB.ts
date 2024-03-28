@@ -1,9 +1,8 @@
 import { Sequelize } from 'sequelize';
-import Buildable from './buildable';
 import BuiltModel from './BuiltModel';
 import emailBuildConfig from './seqbuild/Email.buildconfig';
 
-class EmailDB implements Buildable {
+class EmailDB implements {
     //TODO maybe have to set this not just "any" here...
     private builtModel?: BuiltModel;
 

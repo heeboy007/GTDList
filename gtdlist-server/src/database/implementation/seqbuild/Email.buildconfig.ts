@@ -1,4 +1,4 @@
-import BuildConfigurable from "./buildConfigureable";
+import BuildConfigurable from "./BuildConfigureable";
 import { DataTypes } from "sequelize";
 
 const emailBuildConfig: BuildConfigurable = [
@@ -35,7 +35,8 @@ const emailBuildConfig: BuildConfigurable = [
                 fields: [{ name: 'token' }]
             },
         ],
-        timestamps: false
+        timestamps: false,
+        paranoid: true,
     }
 ];
 

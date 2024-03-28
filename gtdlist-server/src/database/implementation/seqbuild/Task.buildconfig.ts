@@ -27,7 +27,8 @@ const taskBuildConfig: BuildConfigurable = [
             allowNull: false,
         },
         difficulty: {
-            type: DataTypes.STRING,
+            type: DataTypes.ENUM,
+            values: ['easy', 'normal', 'hard'],
             allowNull: false,
         },
         check: {

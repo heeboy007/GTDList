@@ -1,29 +1,38 @@
-import { Sequelize } from 'sequelize';
-import BuiltModel from './BuiltModel';
+import { Model, Sequelize } from 'sequelize';
 import emailBuildConfig from './seqbuild/Email.buildconfig';
+import Sequelizable from '../interface/Sequelizable';
+import { EmailData, EmailDataInput } from '../dataset/Email.dataset';
+import Singleton from '../../util/decorator/Singleton';
+import Log from '../../logger/Log';
 
-class EmailDB implements {
+@Singleton
+class EmailDB extends Model<EmailData, EmailDataInput> implements EmailData, Sequelizable {
     //TODO maybe have to set this not just "any" here...
-    private builtModel?: BuiltModel;
+    
+    token!: string;
+    user_id!: number;
+    expiration_date!: Date;
+    email!: string;
+    verified!: boolean;
 
-    build(sequelize: Sequelize): BuiltModel {
-        let [ tableName, columns, indexes ]: [string, any, any] = emailBuildConfig;
+    //TODO maybe have to set this not just "any" here...
+    linkSequelize(sequelize: Sequelize) {
+        let [ _, columns, indexes ]: [string, any, any] = emailBuildConfig;
         indexes = { 
             ...indexes,
             sequelize: sequelize
         };
-        return sequelize.define(tableName, columns, indexes);
+        EmailDB.init(columns, indexes);
     };
 
-    getBuiltModel(): BuiltModel | void {
-        if(this.builtModel)
-            return this.builtModel;
-        else
-            return;
-    }
-
-    debugIfItsAlreadyBuilt(): boolean {
-        return !!this.builtModel;
+    async syncSequlize() {
+        await EmailDB.sync({force : true})
+        .then(() => {
+            console.log("✅Success Create User Table");
+        })
+        .catch((err) => {
+            console.log("❗️Error in Create User Table : ", err);
+        })
     }
 }
 

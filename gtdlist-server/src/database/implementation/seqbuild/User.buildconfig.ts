@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import BuildConfigurable from './BuildConfigureable';
+import BuildConfigurable from '../../interface/BuildConfigureable';
 
 const userModelConfig: BuildConfigurable = [
     'User',

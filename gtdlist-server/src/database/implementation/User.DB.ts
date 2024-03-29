@@ -1,8 +1,14 @@
 import { Model, Sequelize } from 'sequelize';
 import userBuildConfig from './seqbuild/User.buildconfig';
 import { UserData, UserDataInput } from '../dataset/User.dataset';
+import Sequelizable from '../interface/Sequelizable';
+import Singleton from '../../util/decorator/Singleton';
+import LoginMethods from '../../application/enum/LoginMethods';
+import AccountState from '../../application/enum/AccountState';
+import Log from '../../logger/Log';
 
-class UserDB extends Model<UserData, UserDataInput> implements UserData {
+@Singleton
+class UserDB extends Model<UserData, UserDataInput> implements UserData, Sequelizable {
 
     public id!: number;
     public email!: string;
@@ -18,7 +24,7 @@ class UserDB extends Model<UserData, UserDataInput> implements UserData {
     private isSeqLinked: boolean = false;
 
     //TODO maybe have to set this not just "any" here...
-    static linkSequelize(sequelize: Sequelize) {
+    linkSequelize(sequelize: Sequelize) {
         let [ _, columns, indexes ]: [string, any, any] = userBuildConfig;
         indexes = { 
             ...indexes,
@@ -26,6 +32,16 @@ class UserDB extends Model<UserData, UserDataInput> implements UserData {
         };
         UserDB.init(columns, indexes);
     };
+
+    async syncSequlize() {
+        await UserDB.sync({force : true})
+        .then(() => {
+            console.log("✅Success Create User Table");
+        })
+        .catch((err) => {
+            console.log("❗️Error in Create User Table : ", err);
+        })
+    }
 
     async fetchLoginAttemptUser(email: string): Promise<UserData | null> {
         if(!this.isSeqLinked)  {

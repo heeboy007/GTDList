@@ -12,11 +12,21 @@
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "mysql": "^2.18.1",
+    "mysql2": "^3.9.3",
+    "nodemon": "^3.1.0",
+    "reflect-metadata": "^0.2.1",
     "sequelize": "^6.37.1",
+    "sequelize-cli": "^6.6.2",
     "typescript": "^5.4.3"
   },
   "scripts": {
     "start": "tsc && node dist/main.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/node": "^20.11.30",
+    "@types/validator": "^13.11.9",
+    "tsx": "^4.7.1"
+  }
 }

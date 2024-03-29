@@ -10,3 +10,5 @@ class Log {
         console.error(...log);
     }
 }
+
+export default Log;

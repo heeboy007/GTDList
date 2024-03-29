@@ -3,7 +3,6 @@ import emailBuildConfig from './seqbuild/Email.buildconfig';
 import Sequelizable from '../interface/Sequelizable';
 import { EmailData, EmailDataInput } from '../dataset/Email.dataset';
 import Singleton from '../../util/decorator/Singleton';
-import Log from '../../logger/Log';
 
 @Singleton
 class EmailDB extends Model<EmailData, EmailDataInput> implements EmailData, Sequelizable {

@@ -22,7 +22,7 @@
     "rootDir": "./src", /* specify the root directory of input files. */
     "removeComments": true, /* remove any comments to the compiled js files. */ 
     // "downlevelIteration": true, /* enables full support for es5, es6 iterable compileations */
-    "noEmitOnError": true, /* disable emit on error, prevent generating fault js files */
+    //"noEmitOnError": true, /* disable emit on error, prevent generating fault js files */
 
     /* Linting */
     "strict": true, /* a lot of things combined. */

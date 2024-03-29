@@ -1,9 +1,9 @@
-import { JwtPayload } from "jsonwebtoken";
+// import { JwtPayload } from "jsonwebtoken";
 
-interface UserInterface {
+// interface UserInterface {
 
-    login(email: string, password:string): Promise<JwtPayload>;
+//     login(email: string, password:string): Promise<JwtPayload>;
 
-    logout(): Promise<object>;
+//     logout(): Promise<object>;
 
-}
+// }

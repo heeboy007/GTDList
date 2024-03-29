@@ -4,7 +4,6 @@ import Sequelizable from '../interface/Sequelizable';
 import { TaskData, TaskDataInput } from '../dataset/Task.dataset';
 import Singleton from '../../util/decorator/Singleton';
 import TaskDifficulty from '../../application/enum/TaskDifficulty';
-import Log from '../../logger/Log';
 
 @Singleton
 class TaskDB extends Model<TaskData, TaskDataInput> implements TaskData, Sequelizable {

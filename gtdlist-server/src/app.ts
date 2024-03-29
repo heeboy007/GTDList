@@ -1,11 +1,12 @@
 import express, { Express, Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import LogLinker from './application/middleware/LogLinker';
+import MiddlewareDebugLogger from './application/middleware/MiddlewareDebugLogger';
+import Log from './logger/Log.js';
 
 const app: Express = express();
 
 app.use(bodyParser.json());
-app.use(LogLinker);
+app.use(MiddlewareDebugLogger);
 
 async function configureServer(app: Express){
     try {

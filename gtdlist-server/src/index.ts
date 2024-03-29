@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import app from './app.js';
+import Log from './logger/Log.js';
 
 const loaded: dotenv.DotenvConfigOutput = dotenv.config();
 

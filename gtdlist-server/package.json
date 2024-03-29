@@ -21,7 +21,8 @@
   },
   "type": "module",
   "scripts": {
-    "start": "tsc && node dist/index.js"
+    "start": "tsc && node dist/index.js",
+    "check": "npx eslint . --ext .ts"
   },
   "license": "MIT",
   "devDependencies": {
@@ -29,6 +30,9 @@
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.11.30",
     "@types/validator": "^13.11.9",
+    "@typescript-eslint/parser": "^7.4.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.29.1",
     "tsx": "^4.7.1"
   }
 }

@@ -6,3 +6,5 @@ type OtherCredentials = {
     credential_source: string
 
 };
+
+export default OtherCredentials;

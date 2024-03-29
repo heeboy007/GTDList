@@ -5,3 +5,5 @@ enum AccountState {
     'email_verify_needed',
     'suspended',
 };
+
+export default AccountState;

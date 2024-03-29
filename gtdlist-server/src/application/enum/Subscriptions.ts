@@ -4,3 +4,5 @@ enum Subscriptions {
     'Basic',
     'Pro',
 };
+
+export default Subscriptions;

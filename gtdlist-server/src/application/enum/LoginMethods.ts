@@ -5,3 +5,5 @@ enum LoginMethods {
     'google',
     'discord',
 }
+
+export default LoginMethods;

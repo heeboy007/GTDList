@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 function Singleton<T extends new (...args: any[]) => any>(ctr: T): T {
     let instance: T;

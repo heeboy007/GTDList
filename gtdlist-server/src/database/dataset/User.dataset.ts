@@ -27,5 +27,5 @@ export interface UserData {
 
 }
 
-export interface UserDataInput extends Optional<UserData, 'id' | 'email'> {};
-export interface UserDataOutput extends Required<UserData> {};
+export interface UserDataInput extends Optional<UserData, 'id' | 'email'> {}
+export interface UserDataOutput extends Required<UserData> {}

@@ -1,4 +1,4 @@
-import { Model, Sequelize } from 'sequelize';
+import { InitOptions, Model, ModelAttributes, Optional, Sequelize } from 'sequelize';
 import taskBuildConfig from './seqbuild/Task.buildconfig';
 import Sequelizable from '../interface/Sequelizable';
 import { TaskData, TaskDataInput } from '../dataset/Task.dataset';
@@ -17,15 +17,17 @@ class TaskDB extends Model<TaskData, TaskDataInput> implements TaskData, Sequeli
     public difficulty!: TaskDifficulty;
     public check!: boolean;
 
-    //TODO maybe have to set this not just "any" here...
     linkSequelize(sequelize: Sequelize) {
-        let [ _, columns, indexes ]: [string, any, any] = taskBuildConfig;
+        let indexes = taskBuildConfig[2];
         indexes = { 
             ...indexes,
             sequelize: sequelize
         };
-        TaskDB.init(columns, indexes);
-    };
+        TaskDB.init(
+            taskBuildConfig[1] as ModelAttributes<TaskDB, Optional<TaskData, never>>, 
+            indexes as InitOptions<TaskDB>
+        );
+    }
 
     async syncSequlize() {
         await TaskDB.sync({force : true})

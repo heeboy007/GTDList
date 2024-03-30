@@ -13,4 +13,4 @@ export interface TaskData {
 
 }
 
-export interface TaskDataInput extends Optional<TaskData, 'id'> {};
+export interface TaskDataInput extends Optional<TaskData, 'id'> {}

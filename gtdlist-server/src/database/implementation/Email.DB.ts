@@ -1,4 +1,4 @@
-import { Model, Sequelize } from 'sequelize';
+import { InitOptions, Model, ModelAttributes, Optional, Sequelize } from 'sequelize';
 import emailBuildConfig from './seqbuild/Email.buildconfig';
 import Sequelizable from '../interface/Sequelizable';
 import { EmailData, EmailDataInput } from '../dataset/Email.dataset';
@@ -14,15 +14,17 @@ class EmailDB extends Model<EmailData, EmailDataInput> implements EmailData, Seq
     email!: string;
     verified!: boolean;
 
-    //TODO maybe have to set this not just "any" here...
     linkSequelize(sequelize: Sequelize) {
-        let [ _, columns, indexes ]: [string, any, any] = emailBuildConfig;
+        let indexes = emailBuildConfig[2];
         indexes = { 
             ...indexes,
             sequelize: sequelize
         };
-        EmailDB.init(columns, indexes);
-    };
+        EmailDB.init(
+            emailBuildConfig[1] as ModelAttributes<EmailDB, Optional<EmailData, never>>, 
+            indexes as InitOptions<EmailDB>
+        );
+    }
 
     async syncSequlize() {
         await EmailDB.sync({force : true})

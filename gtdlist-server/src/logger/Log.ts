@@ -1,11 +1,13 @@
 
 //TODO : must implement better logging
+
+type Loggable = object | string | number | boolean ;
 class Log {
-    static L(...log: any) {
+    static L(...log: Loggable[]) {
         console.log(...log);
     }
 
-    static E(...log: any) {
+    static E(...log: Loggable[]) {
         //console.log(...log);
         console.error(...log);
     }

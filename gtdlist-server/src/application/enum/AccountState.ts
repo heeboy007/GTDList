@@ -4,6 +4,6 @@ enum AccountState {
     'closed',
     'email_verify_needed',
     'suspended',
-};
+}
 
 export default AccountState;

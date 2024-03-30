@@ -1,4 +1,4 @@
-import { Model, Sequelize } from 'sequelize';
+import { InitOptions, Model, ModelAttributes, Optional, Sequelize } from 'sequelize';
 import userBuildConfig from './seqbuild/User.buildconfig';
 import { UserData, UserDataInput } from '../dataset/User.dataset';
 import Sequelizable from '../interface/Sequelizable';
@@ -23,15 +23,17 @@ class UserDB extends Model<UserData, UserDataInput> implements UserData, Sequeli
 
     private isSeqLinked: boolean = false;
 
-    //TODO maybe have to set this not just "any" here...
     linkSequelize(sequelize: Sequelize) {
-        let [ _, columns, indexes ]: [string, any, any] = userBuildConfig;
+        let indexes = userBuildConfig[2];
         indexes = { 
             ...indexes,
             sequelize: sequelize
         };
-        UserDB.init(columns, indexes);
-    };
+        UserDB.init(
+            userBuildConfig[1] as ModelAttributes<UserDB, Optional<UserData, never>>, 
+            indexes as InitOptions<UserDB>
+        );
+    }
 
     async syncSequlize() {
         await UserDB.sync({force : true})

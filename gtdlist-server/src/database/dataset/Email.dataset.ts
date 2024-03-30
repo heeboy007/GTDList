@@ -10,5 +10,5 @@ export interface EmailData {
 
 }
 
-export interface EmailDataInput extends Optional<EmailData, 'token' | 'email' | 'user_id'> {};
-export interface EmailDataOutput extends Required<EmailData> {};
+export interface EmailDataInput extends Optional<EmailData, 'token' | 'email' | 'user_id'> {}
+export interface EmailDataOutput extends Required<EmailData> {}

@@ -1,4 +1,4 @@
-import BuildConfigurable from "../../interface/BuildConfigureable";
+import BuildConfigurable from "../../interface/BuildConfigureable.ts";
 import { DataTypes } from "sequelize";
 
 const taskBuildConfig: BuildConfigurable = [

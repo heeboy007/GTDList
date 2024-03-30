@@ -1,8 +1,8 @@
 import { Optional } from "sequelize";
-import LoginMethods from "../../application/enum/LoginMethods";
-import AccountState from "../../application/enum/AccountState";
-import Subscriptions from "../../application/enum/Subscriptions";
-import OtherCredentials from "../../application/types/OtherCredentials";
+import LoginMethods from "../../application/enum/LoginMethods.ts";
+import AccountState from "../../application/enum/AccountState.ts";
+import Subscriptions from "../../application/enum/Subscriptions.ts";
+import OtherCredentials from "../../application/types/OtherCredentials.ts";
 
 export interface UserData {
 

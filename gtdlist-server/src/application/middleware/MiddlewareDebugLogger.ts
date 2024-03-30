@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import Log from '../../logger/Log';
+import Log from '../../logger/Log.ts';
 
 const MiddlewareDebugLogger = function(req: Request, _:Response, next: NextFunction) {
     Log.L("Got Request : ", req);

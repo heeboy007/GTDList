@@ -1,9 +1,9 @@
 import { InitOptions, Model, ModelAttributes, Optional, Sequelize } from 'sequelize';
-import taskBuildConfig from './seqbuild/Task.buildconfig';
-import Sequelizable from '../interface/Sequelizable';
-import { TaskData, TaskDataInput } from '../dataset/Task.dataset';
-import Singleton from '../../util/decorator/Singleton';
-import TaskDifficulty from '../../application/enum/TaskDifficulty';
+import taskBuildConfig from './seqbuild/Task.buildconfig.ts';
+import Sequelizable from '../interface/Sequelizable.ts';
+import { TaskData, TaskDataInput } from '../dataset/Task.dataset.ts';
+import Singleton from '../../util/decorator/Singleton.ts';
+import TaskDifficulty from '../../application/enum/TaskDifficulty.ts';
 
 @Singleton
 class TaskDB extends Model<TaskData, TaskDataInput> implements TaskData, Sequelizable {

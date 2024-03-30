@@ -1,11 +1,11 @@
 import { InitOptions, Model, ModelAttributes, Optional, Sequelize } from 'sequelize';
-import userBuildConfig from './seqbuild/User.buildconfig';
-import { UserData, UserDataInput } from '../dataset/User.dataset';
-import Sequelizable from '../interface/Sequelizable';
-import Singleton from '../../util/decorator/Singleton';
-import LoginMethods from '../../application/enum/LoginMethods';
-import AccountState from '../../application/enum/AccountState';
-import Log from '../../logger/Log';
+import userBuildConfig from './seqbuild/User.buildconfig.ts';
+import { UserData, UserDataInput } from '../dataset/User.dataset.ts';
+import Sequelizable from '../interface/Sequelizable.ts';
+import Singleton from '../../util/decorator/Singleton.ts';
+import LoginMethods from '../../application/enum/LoginMethods.ts';
+import AccountState from '../../application/enum/AccountState.ts';
+import Log from '../../logger/Log.ts';
 
 @Singleton
 class UserDB extends Model<UserData, UserDataInput> implements UserData, Sequelizable {

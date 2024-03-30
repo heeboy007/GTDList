@@ -1,7 +1,7 @@
 
 //TODO : must implement better logging
 
-type Loggable = object | string | number | boolean ;
+type Loggable = object | string | number | boolean | unknown ;
 class Log {
     static L(...log: Loggable[]) {
         console.log(...log);

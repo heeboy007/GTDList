@@ -1,5 +1,5 @@
 import { Optional } from "sequelize";
-import TaskDifficulty from "../../application/enum/TaskDifficulty";
+import TaskDifficulty from "../../application/enum/TaskDifficulty.ts";
 
 export interface TaskData {
 

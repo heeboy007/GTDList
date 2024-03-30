@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import MiddlewareDebugLogger from './application/middleware/MiddlewareDebugLogger';
+import MiddlewareDebugLogger from './application/middleware/MiddlewareDebugLogger.ts';
 import Log from './logger/Log.js';
 
 const app: Express = express();
@@ -12,7 +12,7 @@ async function configureServer(app: Express){
     try {
         //await sequelize.sync();
         Log.L('DB Ready');
-    } catch (error) {
+    } catch (error: unknown) {
         Log.E('Unable to connect with database');
         Log.E(error);
         process.exit(1);

@@ -18,10 +18,7 @@
     ],
     "rules": {
         "@typescript-eslint/no-unused-vars": "off",
-        "import/extensions": ["error", "always", {
-            "js": "never",
-            "ts": "never"
-        }]
+        "import/extensions": ["error", "ignorePackages"]
     },
     "settings": {
     "import/resolver": {

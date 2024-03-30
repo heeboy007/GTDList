@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { UserData } from "../../database/dataset/User.dataset";
+import { UserData } from "../../database/dataset/User.dataset.ts";
 
 class JwtTokenSerivce{
 

@@ -1,32 +1,34 @@
-import { Request, Response } from "express";
+import { Request, Response, Router } from "express";
 import bcrypt from 'bcrypt';
+import { add } from "date-fns";
+import express from "express";
+
 import Authentication from "../interface/Auth.interface.ts";
 import Log from "../../logger/Log.ts";
 import DataBaseSecurity from "../../util/constants/application/DatabaseSecurity.ts";
 import UserDB from "../../database/implementation/User.DB.ts";
 import LoginMethods from "../enum/LoginMethods.ts";
 import AccountState from "../enum/AccountState.ts";
-import { add } from "date-fns";
 import is from "../../util/validator/is.ts";
 
 class DataBaseAuthentication extends Authentication {
 
     async login(req: Request, res: Response): Promise<Response> {
-        
+        Log.L(req.accepted);
         return res.status(200);
     }
 
     async logout(req: Request, res: Response): Promise<Response> {
+        Log.L(req.accepted);
         return res.status(200);
     }
 
     async check(req: Request, res: Response): Promise<Response> {
+        Log.L(req.accepted);
         return res.status(200);
     }
 
     async register(req: Request, res: Response): Promise<Response> {
-        Log.L("API : user.controller.js : register");
-    
         //입력값을 검증함
         const { email, password } = req.body;
         if(!is.email(email)) {
@@ -53,9 +55,19 @@ class DataBaseAuthentication extends Authentication {
             Log.E(e);
             return res.status(500).json({ authError: 'Could not make user.' });
         }
-
     
         return res.status(201).json({ auth: 'user creation success' });
+    }
+
+    getRouter() : Router {
+        const authRouter: Router = express.Router();
+
+        authRouter.post('/register', this.register);
+        authRouter.post('/login', this.login);
+        authRouter.get('/check', this.check);
+        authRouter.post('/logout', this.logout);
+
+        return authRouter;
     }
 
 }

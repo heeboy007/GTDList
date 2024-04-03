@@ -1,6 +1,8 @@
 
 enum TaskDifficulty {
-    'easy', 'normal', 'hard'
+    'easy', 
+    'normal', 
+    'hard'
 }
 
 export default TaskDifficulty;

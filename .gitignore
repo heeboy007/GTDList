@@ -10,6 +10,7 @@ node_modules/
 
 #tsc compiled js files
 dist/
+lib/
 
 #log files
 *.log

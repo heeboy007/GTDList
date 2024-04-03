@@ -14,13 +14,18 @@
     // "resolveJsonModule": true,
     // "isolatedModules": true,
     "allowImportingTsExtensions": true,
-    "noEmit": true,
+
+    // Ensure that .d.ts files are created by tsc, but not .js files
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    // Ensure that Babel can safely transpile files in the TypeScript project
+    "isolatedModules": true,
     
     // "allowJS": true, /* even compile js too! */
     // "checkJS": true, /* Report errors in .js file */
     // "jsx": "preserve", /* react i guess */
     "sourceMap": true, /* browser source will know understand .ts files too! */
-    "outDir": "./dist", /* redirect compiled js to somewhere. */
+    "outDir": "./lib", /* redirect compiled js to somewhere. */
     "rootDir": "./src", /* specify the root directory of input files. */
     "removeComments": true, /* remove any comments to the compiled js files. */ 
     // "downlevelIteration": true, /* enables full support for es5, es6 iterable compileations */
